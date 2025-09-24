@@ -36,15 +36,15 @@
     \begin{enumerate}
         \item[($\Rightarrow$)] \textbf{Zorn $\Rightarrow$ Hausdorff.}
         
-        Let $(A,\le)$ be a partially ordered set. Let $\mathscr{C}$ be the collection of all chains (totally ordered subsets) of $A$, ordered by inclusion $\subseteq$. 
+        Let $(A,\le)$ be a partially ordered set. Let $\mathcal{C}$ be the collection of all chains (totally ordered subsets) of $A$, ordered by inclusion $\subseteq$. 
         
-        If $\mathscr{A}\subseteq \mathscr{C}$ is a chain with respect to $\subseteq$, then
+        If $\mathcal{A}\subseteq \mathcal{C}$ is a chain with respect to $\subseteq$, then
         \[
-            C^\uparrow := \bigcup_{C\in \mathscr{A}} C
+            C^\uparrow := \bigcup_{C\in \mathcal{A}} C
         \]
-        is again a chain in $A$ (any two elements of $C^\uparrow$ lie together in some $C\in\mathscr{A}$ and hence are comparable). Thus $C^\uparrow$ is an upper bound of $\mathscr{A}$ in $(\mathscr{C},\subseteq)$.
+        is again a chain in $A$ (any two elements of $C^\uparrow$ lie together in some $C\in\mathcal{A}$ and hence are comparable). Thus $C^\uparrow$ is an upper bound of $\mathcal{A}$ in $(\mathcal{C},\subseteq)$.
         
-        By \cref{b8cf3e73} (Zorn's Lemma), $(\mathscr{C},\subseteq)$ has a maximal element $C^*$. By definition, $C^*$ is a maximal chain of $A$, which is precisely the Hausdorff maximal principle.
+        By \cref{b8cf3e73} (Zorn's Lemma), $(\mathcal{C},\subseteq)$ has a maximal element $C^*$. By definition, $C^*$ is a maximal chain of $A$, which is precisely the Hausdorff maximal principle.
         
         \item[($\Leftarrow$)] \textbf{Hausdorff $\Rightarrow$ Zorn.}
         
@@ -53,8 +53,6 @@
         We claim that $u$ is a maximal element of $A$. Indeed, if $u$ were not maximal, there would exist $v\in A$ with $u<v$. Then $C^*\cup\{v\}$ is a chain (every element of $C^*$ is $\le u<v$ or $\le v$), properly containing $C^*$, which contradicts the maximality of $C^*$ as a chain. Hence $u$ is maximal, proving Zorn's Lemma.
     \end{enumerate}
 \end{proof}
-
-% <code-to-review>
 
 \begin{thm}
     \cref{b8cf3e73} (Zorn's Lemma) implies \cref{7930915a} (Well-Ordering Principle)
@@ -66,7 +64,7 @@
     Consider
 
     \[
-        \mathscr{W} = \{(B, \le): B \subseteq A,\: \le \text{ a well order on} B \}
+        \mathcal{W} = \{(B, \le): B \subseteq A,\: \le \text{ a well order on} B \}
     \]
 
     For any well-ordered subsets $(B_1, \le_1)$ and $(B_2, \le_2)$, we define a partial order $\subseteq_*$
@@ -133,7 +131,44 @@
 
 \end{proof}
 
-% </code-to-review>
+\begin{thm}
+    \cref{7930915a} (Well-Ordering Principle) implies \cref{4ed30899} (Axiom of Choice).
+\end{thm}
+
+\begin{proof}
+    Given a family of nonempty sets $\{A_{\alpha}: \alpha \in I \}$. Since $A_{\alpha}$ could be well-ordering by 
+    relation $\le_{\alpha}$, thus we define $f: \alpha \to \bigcup_{\alpha \in I} A_{\alpha}$ as
+
+    \[
+        f(\alpha) = \min \{ A_{\alpha} \} \quad \text{by } \le_{\alpha} 
+    \]
+\end{proof}
+
+\begin{thm}
+    \cref{4ed30899} (Axiom of Choice) implies \cref{b8cf3e73} (Zorn's Lemma).
+\end{thm}
+
+\begin{proof}
+    For sake of contradiction, assume $A$ not contains any maximal. 
+    By Axiom of Choice, there exists function $f: A \to A$ and $\forall a \in A,\: a < f(a)$.
+
+    We will construct a injection from Ord $\to A$, and this will violates that Ord is a proper class.
+
+    To construct such injection, we will start with $\alpha_0 \in \mathrm{Ord}$ by pick any $a_0 \in A$.
+
+    And define, we use $\lambda$ to denote any limit ordinal here.
+
+    \begin{align*}
+        h(\alpha_0) &= a_0 \\
+        h(\alpha + 1) &= f(h(\alpha)) \\
+        h(\lambda) & = f(u) \quad u \text{ is upper bound of } \{ h(\beta): \beta < \lambda \}
+    \end{align*}
+
+    $h$ is well defined, since $\{ h(\beta): \beta < \lambda \}$ is totally ordered, and hence has an upper bound.
+
+    After all, the injection $h$ violates that Ord is a proper class, so $A$ must have a maximal element.
+\end{proof}
+
 \subsection{cardinality}
 
 \begin{definition}

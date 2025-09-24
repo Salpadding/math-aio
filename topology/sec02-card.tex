@@ -54,6 +54,75 @@
     \end{enumerate}
 \end{proof}
 
+\begin{thm}
+    \cref{b8cf3e73} (Zorn's Lemma) implies \cref{7930915a} (Well-Ordering Principle)
+\end{thm}
+
+\begin{proof}
+    Given any set $A$,
+
+    Consider
+
+    \[
+        \mathscr{W} = \{(B, \le): B \subseteq A,\: \le \text{ a well order on} B \}
+    \]
+
+    For any well ordering subset $(B_1, \le_1)$ and $(B_2, \le_2)$, we define partial order $\subseteq_*$
+    between them as, $(B_1, \le_1) \subseteq_* (B_2, \le_2)$ iff:
+
+    \begin{enumerate}
+        \item $B_1 \subseteq B_2$
+        \item $\forall x,y \in B_1,\: x \le_1 y $ implies $x \le_2 y$
+        \item $\forall x \in B_1, y \in B_2 \setminus B_1,\: x \le_2 y$
+    \end{enumerate}
+
+    For any chain $C = \{ (B_i, \le_i) \},\: i \in I$ under $\subseteq_*$, we can obtain an upper bound $(B^*, \le_*)$ by
+
+    \begin{align*}
+        B^* &= \bigcup_{i \in I} B_i \\
+        x,y \in B^*,\: x \le_* y & := \exists i \in I,\: x,y \in B_i,\: x \le_i y
+    \end{align*}
+
+    Then $(B^*, \le_*)$ is 
+
+    \begin{enumerate}
+        \item totally ordered
+
+        By $x,y \in B^*$, here exists at least one $B_i \in C$, such that $x, y \in B_i$, and hence $x \le_i y$ or $y \le_i x$ by $\le_i$
+        is totally ordered. The order is independent of $i$, if $j \ne i$ and $x,y \in B_j$, 
+        by $(B_i, \le_i) \subseteq_* (B_j, \le_j)$ or $\supseteq_*$, we got $x \le_j y$ or $y \le_j x$, 
+        which is agreed with $\le_i$.
+
+        \item every subset of $B^*$ has minimum 
+
+        Assume nonempty set $E \subseteq B^*$, pick $a \in E$, there should 
+        exists $i \in I$ such that $a \in B_i$, and hence $E \cap B_i \ne \emptyset$.
+
+        By $B_i$ is well-ordering, we can pick minimum element $a_0$ of $E \cap B_i$ under $\le_i$. 
+
+        We will show $a_0$ is the minimum of $E$ under $\le_*$, for any $a' \in E$,
+        if $a' \in B_i$, then $a_0 \le_i a'$, by $a_0$ is minimum. And hence $a_0 \le_* a'$.
+
+        If $a' \notin B_i$, consider $a' \in B_j$, by $(B_i, \le_i) \subseteq_* (B_j, \le_j)$,
+        and $\le_j$ extends $\le_i$, we got $a_0 \le_j a'$, and hence $a_0 \le_* a'$
+
+    \end{enumerate}.
+
+    After all, $(B^*, \le_*)$ is an upper bound of $C$. Apply \cref{b8cf3e73} (Zorn's lemma), 
+    there exists maximal element $(B^{s}, \le_{s})$ under $\subseteq_*$.
+
+    We will show $B^s = A$, if exists $a \in A \setminus B^s$, we can extend $(B^s, \le_s)$
+    as $(B^s \cup \{ a \}, \le_{t})$, by define $\le_{t}$ as
+
+    \begin{align*}
+        a' & \le_t a \quad \forall a' \in B^s \\
+        a  & \le_t b \quad \text{iff } a \le_s b \quad \forall x,y \in B^s
+    \end{align*}
+
+    which is contradict with $(B^s, \le_s)$ is maximal.
+
+\end{proof}
+
 \subsection{cardinality}
 
 \begin{definition}

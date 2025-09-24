@@ -69,8 +69,8 @@
         \mathscr{W} = \{(B, \le): B \subseteq A,\: \le \text{ a well order on} B \}
     \]
 
-    For any well ordering subset $(B_1, \le_1)$ and $(B_2, \le_2)$, we define partial order $\subseteq_*$
-    between them as, $(B_1, \le_1) \subseteq_* (B_2, \le_2)$ iff:
+    For any well-ordered subsets $(B_1, \le_1)$ and $(B_2, \le_2)$, we define a partial order $\subseteq_*$
+    between them as follows: $(B_1, \le_1) \subseteq_* (B_2, \le_2)$ iff:
 
     \begin{enumerate}
         \item $B_1 \subseteq B_2$
@@ -78,50 +78,58 @@
         \item $\forall x \in B_1, y \in B_2 \setminus B_1,\: x \le_2 y$
     \end{enumerate}
 
-    For any chain $C = \{ (B_i, \le_i) \},\: i \in I$ under $\subseteq_*$, we can obtain an upper bound $(B^*, \le_*)$ by
+    For any chain $C = \{ (B_i, \le_i) \}_{i \in I}$ under $\subseteq_*$, we can obtain an upper bound $(B^*, \le_*)$ by defining:
 
     \begin{align*}
         B^* &= \bigcup_{i \in I} B_i \\
-        x,y \in B^*,\: x \le_* y & := \exists i \in I,\: x,y \in B_i,\: x \le_i y
+        x \le_* y &\iff \exists i \in I \text{ such that } x,y \in B_i \text{ and } x \le_i y
     \end{align*}
 
-    Then $(B^*, \le_*)$ is 
+    Then $(B^*, \le_*)$ is well-ordered: 
 
     \begin{enumerate}
-        \item totally ordered
+        \item \textbf{Totally ordered:} 
+        
+        For any $x,y \in B^*$, there exist indices $i, j \in I$ such that $x \in B_i$ and $y \in B_j$. 
+        Since $C$ is a chain under $\subseteq_*$, either $(B_i, \le_i) \subseteq_* (B_j, \le_j)$ or 
+        $(B_j, \le_j) \subseteq_* (B_i, \le_i)$. Without loss of generality, assume the former. 
+        Then $x \in B_i \subseteq B_j$, so both $x, y \in B_j$. Since $\le_j$ is a total order on $B_j$, 
+        either $x \le_j y$ or $y \le_j x$, which means either $x \le_* y$ or $y \le_* x$.
 
-        By $x,y \in B^*$, here exists at least one $B_i \in C$, such that $x, y \in B_i$, and hence $x \le_i y$ or $y \le_i x$ by $\le_i$
-        is totally ordered. The order is independent of $i$, if $j \ne i$ and $x,y \in B_j$, 
-        by $(B_i, \le_i) \subseteq_* (B_j, \le_j)$ or $\supseteq_*$, we got $x \le_j y$ or $y \le_j x$, 
-        which is agreed with $\le_i$.
+        \item \textbf{Every nonempty subset has a minimum element:} 
+        
+        Let $E \subseteq B^*$ be nonempty. Pick any $a \in E$; then there exists $i \in I$ such that $a \in B_i$, 
+        and hence $E \cap B_i \neq \emptyset$. Since $(B_i, \le_i)$ is well-ordered, the nonempty set $E \cap B_i$ 
+        has a minimum element $a_0$ under $\le_i$. 
 
-        \item every subset of $B^*$ has minimum 
+        We claim that $a_0$ is the minimum of $E$ under $\le_*$. For any $a' \in E$:
+        \begin{itemize}
+            \item If $a' \in B_i$, then $a_0 \le_i a'$ since $a_0$ is the minimum of $E \cap B_i$, so $a_0 \le_* a'$.
+            \item If $a' \notin B_i$, then $a' \in B_j$ for some $j \in I$. Since $C$ is a chain, either 
+            $(B_i, \le_i) \subseteq_* (B_j, \le_j)$ or $(B_j, \le_j) \subseteq_* (B_i, \le_i)$. 
+            In the first case, $a_0 \in B_i \subseteq B_j$ and by condition (3) of $\subseteq_*$, we have $a_0 \le_j a'$, 
+            so $a_0 \le_* a'$. In the second case, $a' \in B_j \subseteq B_i$, contradicting $a' \notin B_i$.
+        \end{itemize}
+        
+        Therefore, $a_0 \le_* a'$ for all $a' \in E$, making $a_0$ the minimum element of $E$.
+    \end{enumerate}
 
-        Assume nonempty set $E \subseteq B^*$, pick $a \in E$, there should 
-        exists $i \in I$ such that $a \in B_i$, and hence $E \cap B_i \ne \emptyset$.
+    Thus, $(B^*, \le_*)$ is an upper bound of the chain $C$. By \cref{b8cf3e73} (Zorn's Lemma), 
+    there exists a maximal element $(B^{s}, \le_{s})$ under $\subseteq_*$.
 
-        By $B_i$ is well-ordering, we can pick minimum element $a_0$ of $E \cap B_i$ under $\le_i$. 
-
-        We will show $a_0$ is the minimum of $E$ under $\le_*$, for any $a' \in E$,
-        if $a' \in B_i$, then $a_0 \le_i a'$, by $a_0$ is minimum. And hence $a_0 \le_* a'$.
-
-        If $a' \notin B_i$, consider $a' \in B_j$, by $(B_i, \le_i) \subseteq_* (B_j, \le_j)$,
-        and $\le_j$ extends $\le_i$, we got $a_0 \le_j a'$, and hence $a_0 \le_* a'$
-
-    \end{enumerate}.
-
-    After all, $(B^*, \le_*)$ is an upper bound of $C$. Apply \cref{b8cf3e73} (Zorn's lemma), 
-    there exists maximal element $(B^{s}, \le_{s})$ under $\subseteq_*$.
-
-    We will show $B^s = A$, if exists $a \in A \setminus B^s$, we can extend $(B^s, \le_s)$
-    as $(B^s \cup \{ a \}, \le_{t})$, by define $\le_{t}$ as
-
+    We claim that $B^s = A$. Suppose for contradiction that there exists $a \in A \setminus B^s$. 
+    We can then extend $(B^s, \le_s)$ to $(B^s \cup \{ a \}, \le_{t})$ by defining $\le_{t}$ as follows:
     \begin{align*}
-        a' & \le_t a \quad \forall a' \in B^s \\
-        a  & \le_t b \quad \text{iff } a \le_s b \quad \forall x,y \in B^s
+        x \le_t y &\iff x \le_s y \quad \text{for all } x,y \in B^s \\
+        x \le_t a &\text{ for all } x \in B^s \\
+        a \le_t y &\iff \text{false for all } y \in B^s
     \end{align*}
-
-    which is contradict with $(B^s, \le_s)$ is maximal.
+    
+    This makes $a$ the maximum element of $B^s \cup \{a\}$ under $\le_t$. It is straightforward to verify that 
+    $\le_t$ is a well-ordering on $B^s \cup \{a\}$ and that $(B^s, \le_s) \subseteq_* (B^s \cup \{a\}, \le_t)$. 
+    This contradicts the maximality of $(B^s, \le_s)$.
+    
+    Therefore, $B^s = A$, and $(A, \le_s)$ is well-ordered.
 
 \end{proof}
 

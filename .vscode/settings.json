@@ -8,7 +8,7 @@
         "**/*.toc": true,
         "**/*.fdb_latexmk": true,
         "**/*.synctex.gz": true,
-        "notes-daily/**/*.pdf": true,
+        "**/*.pdf": true,
         "**/*.dvi": true
     }
 }

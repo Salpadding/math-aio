@@ -88,38 +88,38 @@
     \begin{enumerate}
         \item totally ordered
 
-        By $x,y \in B^*$, here exists at least one $B_i \in C$, such that $x, y \in B_i$, and hence $x \le_i y$ or $y \le_i x$ by $\le_i$
-        is totally ordered. The order is independent of $i$, if $j \ne i$ and $x,y \in B_j$, 
-        by $(B_i, \le_i) \subseteq_* (B_j, \le_j)$ or $\supseteq_*$, we got $x \le_j y$ or $y \le_j x$, 
-        which is agreed with $\le_i$.
+        By $x,y \in B^*$, there exists at least one $B_i \in C$ such that $x, y \in B_i$, and hence $x \le_i y$ or $y \le_i x$ since $\le_i$
+        is a total order. The order is independent of the choice of $i$: if $j \ne i$ and $x,y \in B_j$, 
+        then by $(B_i, \le_i) \subseteq_* (B_j, \le_j)$ or $(B_j, \le_j) \subseteq_* (B_i, \le_i)$, we have $x \le_j y$ or $y \le_j x$, 
+        which agrees with $\le_i$.
 
-        \item every subset of $B^*$ has minimum 
+        \item every nonempty subset of $B^*$ has a minimum element
 
-        Assume nonempty set $E \subseteq B^*$, pick $a \in E$, there should 
+        Assume $E \subseteq B^*$ is nonempty. Pick $a \in E$; there 
         exists $i \in I$ such that $a \in B_i$, and hence $E \cap B_i \ne \emptyset$.
 
-        By $B_i$ is well-ordering, we can pick minimum element $a_0$ of $E \cap B_i$ under $\le_i$. 
+        Since $B_i$ is well-ordered, we can pick the minimum element $a_0$ of $E \cap B_i$ under $\le_i$. 
 
-        We will show $a_0$ is the minimum of $E$ under $\le_*$, for any $a' \in E$,
-        if $a' \in B_i$, then $a_0 \le_i a'$, by $a_0$ is minimum. And hence $a_0 \le_* a'$.
+        We will show that $a_0$ is the minimum of $E$ under $\le_*$. For any $a' \in E$,
+        if $a' \in B_i$, then $a_0 \le_i a'$ since $a_0$ is the minimum, and hence $a_0 \le_* a'$.
 
-        If $a' \notin B_i$, consider $a' \in B_j$, by $(B_i, \le_i) \subseteq_* (B_j, \le_j)$,
-        and $\le_j$ extends $\le_i$, we got $a_0 \le_j a'$, and hence $a_0 \le_* a'$
+        If $a' \notin B_i$, then $a' \in B_j$ for some $j$. By $(B_i, \le_i) \subseteq_* (B_j, \le_j)$,
+        and since $\le_j$ extends $\le_i$, we have $a_0 \le_j a'$, and hence $a_0 \le_* a'$.
 
-    \end{enumerate}.
+    \end{enumerate}
 
-    After all, $(B^*, \le_*)$ is an upper bound of $C$. Apply \cref{b8cf3e73} (Zorn's lemma), 
-    there exists maximal element $(B^{s}, \le_{s})$ under $\subseteq_*$.
+    Therefore, $(B^*, \le_*)$ is an upper bound of $C$. By applying Zorn's lemma, 
+    there exists a maximal element $(B^{s}, \le_{s})$ under $\subseteq_*$.
 
-    We will show $B^s = A$, if exists $a \in A \setminus B^s$, we can extend $(B^s, \le_s)$
-    as $(B^s \cup \{ a \}, \le_{t})$, by define $\le_{t}$ as
+    We will show that $B^s = A$. If there exists $a \in A \setminus B^s$, we can extend $(B^s, \le_s)$
+    to $(B^s \cup \{ a \}, \le_{t})$ by defining $\le_{t}$ as
 
     \begin{align*}
         a' & \le_t a \quad \forall a' \in B^s \\
-        a  & \le_t b \quad \text{iff } a \le_s b \quad \forall x,y \in B^s
+        a  & \le_t b \quad \text{iff } a \le_s b \quad \forall a,b \in B^s
     \end{align*}
 
-    which is contradict with $(B^s, \le_s)$ is maximal.
+    which contradicts the maximality of $(B^s, \le_s)$.
 
 \end{proof}
 
@@ -206,39 +206,40 @@ $\mathrm{card}(Y) \leq \mathrm{card}(X)$.
 \end{thm}
 
 \begin{proof}
-    consider set function $h: \mathscr{P}(X) \to \mathscr{P}(X)$
+% <code-to-review>
+    Consider the set function $h: \mathscr{P}(X) \to \mathscr{P}(X)$
 
     \[
         h(E) =  X \setminus g(Y \setminus f(E)) 
     \]
 
-    Since $h$ is monotone increasing, there exists fixed point $A \subseteq X$ and
+    Since $h$ is monotone increasing, there exists a fixed point $A \subseteq X$ such that
 
     \begin{align*}
         A &= h(A) = \bigcup \{ E: E \subseteq h(E) \} \\
     \end{align*}
 
-    where $E \subseteq h(E)$ is equivalent to $E \cap g(Y \setminus f(E)) = \emptyset$,
-    by $A = h(A)$, shows $A \cap g(Y \setminus f(A)) = \emptyset$.
+    where $E \subseteq h(E)$ is equivalent to $E \cap g(Y \setminus f(E)) = \emptyset$.
+    Since $A = h(A)$, we have $A \cap g(Y \setminus f(A)) = \emptyset$.
 
-    Now, define $B = f(A),\: \tilde{B} = Y \setminus B$.
+    Now, define $B = f(A)$ and $\tilde{B} = Y \setminus B$.
 
-    It is obviously that $A \cap g(\tilde{B}) = \emptyset$ by
+    It is obvious that $A \cap g(\tilde{B}) = \emptyset$ by
 
     \[
         A \cap g(Y \setminus B) =  A \cap g(Y \setminus f(A)) = \emptyset
     \]
 
-    And thus $g(\tilde{B}) \subseteq X \setminus A$, assume $x_0 \in X \setminus A$, while $x_0 \notin g(\tilde{B})$,
-    Put $A_0 = A \cup \{ x_0 \}$, Then
+    And thus $g(\tilde{B}) \subseteq X \setminus A$. Assume $x_0 \in X \setminus A$ while $x_0 \notin g(\tilde{B})$.
+    Put $A_0 = A \cup \{ x_0 \}$. Then
 
     \begin{align*}
         A_0 \cap g(Y \setminus f(A_0)) & \subseteq A_0  \cap g(Y \setminus f(A)) \\
         & \subseteq \emptyset 
     \end{align*}
 
-    It is contradict with $A$ is maximal set which satisfy $A \subseteq h(A)$
-
+    This contradicts the fact that $A$ is the maximal set which satisfies $A \subseteq h(A)$.
+% </code-to-review>
 \end{proof}
 
 \begin{thm}
@@ -247,9 +248,9 @@ $\mathrm{card}(Y) \leq \mathrm{card}(X)$.
 \end{thm}
 
 \begin{proof}
-    Let $f: X \to Y$ and $g: Y \to X$ both be injection.
-    By \cref{5dd1cdb2}, we can divide $X$ as disjoint union $A \cup \tilde{A}$, and $Y$
-    as disjoin union $B \cup \tilde{B}$, such that $f(A) = B,\: g(\tilde{B}) = \tilde{A}$.
+    Let $f: X \to Y$ and $g: Y \to X$ both be injections.
+    By \cref{5dd1cdb2}, we can divide $X$ as a disjoint union $A \cup \tilde{A}$, and $Y$
+    as a disjoint union $B \cup \tilde{B}$, such that $f(A) = B$ and $g(\tilde{B}) = \tilde{A}$.
 
     Now, let's define $h: X \to Y$ as
 
@@ -260,10 +261,10 @@ $\mathrm{card}(Y) \leq \mathrm{card}(X)$.
         \end{cases}
     \end{align*}
 
-    This is a well define because $g$ is bijection on $\tilde{B} \to \tilde{A}$, hence has inverse.
+    This is well-defined because $g$ is a bijection from $\tilde{B}$ to $\tilde{A}$, and hence has an inverse.
 
-    Then $h$ is injection, since $f(A) \cap g^{-1}(\tilde{A}) = B \cap \tilde{B} = \emptyset$. $h$
-    is surjection by $h(X) = h(A \cup \tilde{A}) = h(A) \cup h(\tilde{A}) = B \cup \tilde{B} = Y$
+    Then $h$ is injective, since $f(A) \cap g^{-1}(\tilde{A}) = B \cap \tilde{B} = \emptyset$. Also, $h$
+    is surjective since $h(X) = h(A \cup \tilde{A}) = h(A) \cup h(\tilde{A}) = B \cup \tilde{B} = Y$.
 \end{proof}
 
 \begin{prop}
@@ -271,7 +272,7 @@ For any set $X$, $\mathrm{card}(X) < \mathrm{card}(\mathscr{P}(X))$
 \end{prop}
 
 \begin{proof}
-    ($\le$) Define $h: X \to \mathscr{P}(X)$ where $h(x) = \{x\}$, then $h$ is injection obviously.
+    ($\le$) Define $h: X \to \mathscr{P}(X)$ where $h(x) = \{x\}$, then $h$ is obviously an injection.
 
 
 (strictness) Suppose, for contradiction, there is a bijection $f:X\to\mathscr{P}(X)$
@@ -301,7 +302,7 @@ $\mathrm{card}(X)<\mathrm{card}(\mathscr{P}(X))$.
 \end{thm}
 
 \begin{proof}
-    We can pick $a_0,a_1,a_2,\dots$ from $A$, and define surjection $f: A \to \mathbb{N}$ as
+    We can pick $a_0,a_1,a_2,\dots$ from $A$, and define a surjection $f: A \to \mathbb{N}$ by
 
     \[
         f(a_i) = i
@@ -329,9 +330,9 @@ $\mathrm{card}(X)<\mathrm{card}(\mathscr{P}(X))$.
 \end{exercise}
 
 \begin{proof}
-    We will prove at first, if $x_0 < y_0$, $f(x_0) < f(y_0)$, then $\forall x \in (x_0, y_0),\: f(x_0) < f(x) < f(y)$.
+    We will prove first that if $x_0 < y_0$ and $f(x_0) < f(y_0)$, then $\forall x \in (x_0, y_0)$, we have $f(x_0) < f(x) < f(y_0)$.
 
-    For contradiction, assume exists $x \in (x_0, y_0),\: f(x) < f(x_0)$.
+    For contradiction, assume there exists $x \in (x_0, y_0)$ such that $f(x) < f(x_0)$.
 
     Put
 
@@ -340,22 +341,22 @@ $\mathrm{card}(X)<\mathrm{card}(\mathscr{P}(X))$.
         c & \in [f(x), f(x_0)] \cap [f(x), f(y_0)] 
     \end{align*}
 
-    by intermediate theorem, there exists $y \in [x_0, x],\: f(y) = c$.
-    And $y_1 \in [x,y_0], f(y_1) = c$.
+    By the Intermediate Value Theorem, there exists $y \in [x_0, x]$ such that $f(y) = c$
+    and $y_1 \in [x,y_0]$ such that $f(y_1) = c$.
 
-    By $y < y_1$ (Otherwise $f(x) = c$, impossible), we got $f$ no longer be injective, shows 
-    contradict with $f(x) < f(x_0)$.
+    Since $y < y_1$ (otherwise $f(x) = c$, which is impossible), we have that $f$ is no longer injective, 
+    which contradicts our assumption that $f(x) < f(x_0)$.
 
-    Similarly for $f(x) > f(y_0)$.
+    The case $f(x) > f(y_0)$ is similar.
 
-    Now we can prove $f$ is strictly increasing on any $[x_0, y_0]$ if $f(x_0) < f(y_0)$. Pick $x <y,\: x,y \in (x_0, y_0)$. By $y \in (x_0, y_0)$,
-    we got $f(x_0) < f(y) < f(y_0)$, by $x \in (x_0, y)$, we got $f(x_0) < f(x) < f(y)$.
+    Now we can prove that $f$ is strictly increasing on any interval $[x_0, y_0]$ where $f(x_0) < f(y_0)$. Pick $x < y$ with $x,y \in (x_0, y_0)$. Since $y \in (x_0, y_0)$,
+    we have $f(x_0) < f(y) < f(y_0)$, and since $x \in (x_0, y)$, we have $f(x_0) < f(x) < f(y)$.
 
-    Further more, we can extend $[x_0, y_0]$ to $[x_0, y_0 + \delta]$ by any $\delta > 0$,
-    and keep $f(x_0) < f(y_0 + \delta)$. Because if $f(y_0 + \delta) < f(x_0)$, 
-    shows $-f(x_0) < - f(y_0 + \delta)$, but $-f(y_0) < -f(x_0)$, be contradict with our previous conclusion. 
+    Furthermore, we can extend $[x_0, y_0]$ to $[x_0, y_0 + \delta]$ for any $\delta > 0$,
+    and maintain $f(x_0) < f(y_0 + \delta)$. Indeed, if $f(y_0 + \delta) < f(x_0)$, 
+    then $-f(x_0) < - f(y_0 + \delta)$, but $-f(y_0) < -f(x_0)$, which contradicts our previous conclusion. 
 
-    Similarly, we can extend $[x_0, y_0]$ to $[x_0 - \delta, y_0]$. Combine above, we can extend $[x_0, y_0]$
+    Similarly, we can extend $[x_0, y_0]$ to $[x_0 - \delta, y_0]$. Combining the above, we can extend $[x_0, y_0]$
     to cover every point in $\mathbb{R}$.
 
 
@@ -399,10 +400,11 @@ Therefore our assumption was false, and $f$ must be injective on $\mathbb{Q}$.
 \end{exercise}
 
 \begin{proof}
-   $f$ is injective obviously, otherwise if $f(x_1) = f(x_2) = y$, then $h(x_1) = h(x_2) = g(y)$, which is contradict with
-   $h$ is injective.
+    $f$ is obviously injective. Otherwise, if $f(x_1) = f(x_2) = y$, then $g(x_1) = g(x_2) = g(y)$, which contradicts the assumption that
+    $g$ is injective.
 
-   $g$ is also surjective, if exists $x \in X$ and $x \notin g(Y)$. Then we got $h(x) \ne x$ since $x \notin g(Y)$
+    $g$ is also surjective. If there exists $x \in X$ such that $x \notin g(Y)$, then $g(f(x)) \ne x$ since $x \notin g(Y)$, 
+    contradicting the given condition.
 \end{proof}
 
 \begin{exercise}
@@ -410,23 +412,23 @@ Therefore our assumption was false, and $f$ must be injective on $\mathbb{Q}$.
 \end{exercise}
 
 \begin{proof}
-   Consider vector space $V$, which is not zero space. Let $E$ contains  
-   all linearly independent subset of $V$. Consider $\subseteq$ as partial order.
-   For any total order chain $C$, define 
+   Consider the vector space $V$, which is not the zero space. Let $E$ be the collection of  
+   all linearly independent subsets of $V$. Consider $\subseteq$ as a partial order.
+   For any totally ordered chain $C$, define 
 
    \[
         W = \bigcup_{U \in C} U
    \]
 
-   We will show $W$ is linearly independent. Assume $x_1, x_2, \dots, x_n \in W$, and exists $c_1,c_2,\dots c_n$ such that
+   We will show that $W$ is linearly independent. Assume $x_1, x_2, \dots, x_n \in W$, and suppose there exist $c_1,c_2,\dots, c_n$ such that
 
    \[
     c_1x_1 + c_2 x_2 + \dots + c_n x_n = 0
    \]
 
-    Since $x_i \in U_i,\: 1 \le i \le n$, for some linearly independent subset $U_i$. 
-    By $W$ is totally ordered, there exists $U'$ which is the 
-    maximum element in $U_1,U_2,\dots ,U_n$. Since $x_i \in U', \: \forall 1 \le i \le n$, 
-    and $U'$ is linearly independent, we got $c_1 = c_2 = \dots = c_n = 0$
+    Since $x_i \in U_i$ for some linearly independent subset $U_i$, where $1 \le i \le n$, 
+    and since $C$ is totally ordered, there exists $U'$ which is the 
+    maximum element among $U_1,U_2,\dots ,U_n$. Since $x_i \in U'$ for all $1 \le i \le n$, 
+    and $U'$ is linearly independent, we have $c_1 = c_2 = \dots = c_n = 0$.
 
 \end{proof}

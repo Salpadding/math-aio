@@ -29,33 +29,28 @@
 \end{thm}
 
 \begin{thm}
-    \cref{b8cf3e73} is equivalent to \cref{56941de4}
+\cref{b8cf3e73} (Zorn's Lemma) is equivalent to \cref{56941de4} (Hausdorff Maximal Principle).
 \end{thm}
 
 \begin{proof}
     \begin{enumerate}
-        \item[($\Rightarrow$)]
-
-        Let $\mathscr{C}$ contains all chain of $A$. Then $\subseteq$ becomes
-        a partial order for $\mathscr{C}$. And any totally ordered subset $\mathscr{A}$ of $\mathscr{C}$
-        has upper bound:
-
+        \item[($\Rightarrow$)] \textbf{Zorn $\Rightarrow$ Hausdorff.}
+        
+        Let $(A,\le)$ be a partially ordered set. Let $\mathscr{C}$ be the collection of all chains (totally ordered subsets) of $A$, ordered by inclusion $\subseteq$. 
+        
+        If $\mathscr{A}\subseteq \mathscr{C}$ is a chain with respect to $\subseteq$, then
         \[
-            \bigcup_{C \in \mathscr{A}} C
+            C^\uparrow := \bigcup_{C\in \mathscr{A}} C
         \]
-
-        By \cref{b8cf3e73}, $\mathscr{C}$ has a maximal element $C^*$ under partial order $\subseteq$.
-        Then $C^*$ is the maximal chain.
-
-        \item[($\Leftarrow$)]
-
-        Assume $\le$ is a partial order defined on set $A$, and every chain of $A$ has an upper bound.
-        By \cref{56941de4}, $A$ has a maximal chain.
-        For sake of contradiction, assume $A$ has no maximal element $C^*$. Let $a$
-        be an upper bound of $C^*$, since $a$ is not maximal, there exists $a' > a$, 
-        which is contradict with $C^*$ is maximal chain, since we can append $a'$ to $C^*$ 
-        and obtain a larger chain.
-
+        is again a chain in $A$ (any two elements of $C^\uparrow$ lie together in some $C\in\mathscr{A}$ and hence are comparable). Thus $C^\uparrow$ is an upper bound of $\mathscr{A}$ in $(\mathscr{C},\subseteq)$.
+        
+        By \cref{b8cf3e73} (Zorn's Lemma), $(\mathscr{C},\subseteq)$ has a maximal element $C^*$. By definition, $C^*$ is a maximal chain of $A$, which is precisely the Hausdorff maximal principle.
+        
+        \item[($\Leftarrow$)] \textbf{Hausdorff $\Rightarrow$ Zorn.}
+        
+        Suppose $(A,\le)$ is a partially ordered set in which every chain has an upper bound in $A$. By \cref{56941de4} (Hausdorff), there exists a maximal chain $C^*\subseteq A$. Let $u$ be an upper bound of $C^*$ in $A$.
+        
+        We claim that $u$ is a maximal element of $A$. Indeed, if $u$ were not maximal, there would exist $v\in A$ with $u<v$. Then $C^*\cup\{v\}$ is a chain (every element of $C^*$ is $\le u<v$ or $\le v$), properly containing $C^*$, which contradicts the maximality of $C^*$ as a chain. Hence $u$ is maximal, proving Zorn's Lemma.
     \end{enumerate}
 \end{proof}
 

@@ -412,6 +412,12 @@ $\mathrm{card}(X)<\mathrm{card}(\mathscr{P}(X))$.
     Then $h$ is a surjection. Since $\mathrm{card}(\mathbb{N} \times \mathbb{N}) = \mathrm{card}(\mathbb{N})$ and
     $\mathrm{card}(A) \le \mathrm{card}(\mathbb{N} \times \mathbb{N})$, we conclude that
     $\mathrm{card}(A) = \mathrm{card}(\mathbb{N})$.
+    Therefore $W$ is linearly independent and is an upper bound for the chain $C$. 
+    By Zorn's Lemma, $\mathcal{E}$ has a maximal element $B$. 
+    
+    We claim that $B$ spans $V$. If not, there exists $v \in V$ such that $v \notin \text{span}(B)$. 
+    Then $B \cup \{v\}$ would be linearly independent, contradicting the maximality of $B$. 
+    Therefore $B$ is a basis for $V$.
 \end{proof>
 
 \begin{definition}[Cardinality of the continuum]
@@ -478,8 +484,10 @@ $\mathrm{card}(X)<\mathrm{card}(\mathscr{P}(X))$.
 
 \begin{proof}
     \begin{enumerate}
-        \item  Define $\varphi: \mathbb{N} \to \mathbb{N}, \varphi(n) = 2n$ and $\phi: \mathbb{N} \to \mathbb{N}, \phi(n) = 2n + 1$
-    and $f: \mathcal{P} \times \mathcal{P} \to \mathcal{P}$, where $f(A, B) = \varphi(A) \cup \phi(B)$
+        \item  Define $\varphi: \mathbb{N} \to \mathbb{N}$ by $\varphi(n) = 2n$ and $\psi: \mathbb{N} \to \mathbb{N}$ by $\psi(n) = 2n + 1$.
+    Define $f: \mathcal{P}(\mathbb{N}) \times \mathcal{P}(\mathbb{N}) \to \mathcal{P}(\mathbb{N})$ by $f(A, B) = \varphi(A) \cup \psi(B)$.
+    This map is injective, showing $\mathrm{card}(\mathcal{P}(\mathbb{N}) \times \mathcal{P}(\mathbb{N})) \le \mathrm{card}(\mathcal{P}(\mathbb{N}))$.
+    The reverse inequality follows from the canonical injection $A \mapsto (A, \emptyset)$.
 
         \item Define
 
@@ -487,23 +495,23 @@ $\mathrm{card}(X)<\mathrm{card}(\mathscr{P}(X))$.
             X = \bigcup_{\alpha \in A}X_{\alpha}
         \]
 
-        For every $x \in X$ exists $\alpha \in I$ such that $x \in X_{\alpha}$, by \cref{4ed30899} (axiom of choice).
-        There exists $\beta: X \to A $ and $x \in X_{\beta(x)}$.
+        For every $x \in X$, there exists $\alpha \in A$ such that $x \in X_{\alpha}$. By the Axiom of Choice (\cref{4ed30899}),
+        there exists a function $\beta: X \to A$ such that $x \in X_{\beta(x)}$ for all $x \in X$.
 
-        By $\mathrm{card}(X_{\alpha}) \le \mathfrak{c}$ and $\mathrm{card}(A) \le \mathbb{R}$, there exists injection $g_{\alpha}: X_{\alpha} \to \mathbb{R}$
-        and injection $f: A \to \mathbb{R}$.
+        Since $\mathrm{card}(X_{\alpha}) \le \mathfrak{c}$ and $\mathrm{card}(A) \le \mathfrak{c}$, there exist injections $g_{\alpha}: X_{\alpha} \to \mathbb{R}$
+        and an injection $f: A \to \mathbb{R}$.
 
-        And we define $h: X \to \mathbb{R} \times \mathbb{R}$ as
+        Define $h: X \to \mathbb{R} \times \mathbb{R}$ by
 
         \[
-            h(x) = \Big( f(\beta(x)), g_{\beta(x)}(x) \Big)
+            h(x) = \big( f(\beta(x)), g_{\beta(x)}(x) \big)
         \]
 
-        Assume $x_1 \ne x_2$, one of $\beta(x_1) \ne \beta(x_2),\: g_{\beta(x_1)}(x_1) \ne g_{\beta{(x_2)}}(x_2)$ should satisfy.
-        So  $h$ is a injection from $X$ to $\mathbb{R} \times \mathbb{R}$, and hence
+        For $x_1 \ne x_2$, either $\beta(x_1) \ne \beta(x_2)$ or $g_{\beta(x_1)}(x_1) \ne g_{\beta(x_2)}(x_2)$ (or both).
+        Therefore $h$ is an injection from $X$ to $\mathbb{R} \times \mathbb{R}$, and hence
 
         \[
-            \mathrm{card}(X) \le \mathfrak{c}
+            \mathrm{card}(X) \le \mathrm{card}(\mathbb{R} \times \mathbb{R}) = \mathfrak{c}
         \]
     \end{enumerate}
 \end{proof}
@@ -572,35 +580,36 @@ $\mathrm{card}(X)<\mathrm{card}(\mathscr{P}(X))$.
 \subsection{Exercise}
 
 \begin{exercise}
-    Let $f: \mathbb{R} \to \mathbb{R}$ be continuous and injective, then $f$ is strictly monotone.
-\end{exercise}
+    Let $f: \mathbb{R} \to \mathbb{R}$ be continuous and injective. Then $f$ is strictly monotone.
+\end{exercise>
 
 \begin{proof}
-    We will prove at first, if $x_0 < y_0$, $f(x_0) < f(y_0)$, then $\forall x \in (x_0, y_0),\: f(x_0) < f(x) < f(y)$.
+    We will first prove that if $x_0 < y_0$ and $f(x_0) < f(y_0)$, then for all $x \in (x_0, y_0)$, we have $f(x_0) < f(x) < f(y_0)$.
 
-    For contradiction, assume exists $x \in (x_0, y_0),\: f(x) < f(x_0)$.
+    For contradiction, suppose there exists $x \in (x_0, y_0)$ such that $f(x) < f(x_0)$.
 
-    Put
+    Let
 
     \begin{align*}
-        c &= \frac{f(x) + f(x_0)}{2} \\
-        c & \in [f(x), f(x_0)] \cap [f(x), f(y_0)] 
+        c &= \frac{f(x) + f(x_0)}{2}
     \end{align*}
 
-    by intermediate theorem, there exists $y \in [x_0, x],\: f(y) = c$.
-    And $y_1 \in [x,y_0], f(y_1) = c$.
+    Note that $c \in (f(x), f(x_0))$ and also $c \in (f(x), f(y_0))$ since $f(x_0) < f(y_0)$.
 
-    By $y < y_1$ (Otherwise $f(x) = c$, impossible), we got $f$ no longer be injective, shows 
-    contradict with $f(x) < f(x_0)$.
+    By the Intermediate Value Theorem, there exists $y \in (x_0, x)$ such that $f(y) = c$,
+    and there exists $y_1 \in (x, y_0)$ such that $f(y_1) = c$.
 
-    Similarly for $f(x) > f(y_0)$.
+    Since $y < y_1$ but $f(y) = f(y_1) = c$, this contradicts the injectivity of $f$.
+    Therefore, we cannot have $f(x) < f(x_0)$.
 
-    Now we can prove $f$ is strictly increasing on any $[x_0, y_0]$ if $f(x_0) < f(y_0)$. Pick $x <y,\: x,y \in (x_0, y_0)$. By $y \in (x_0, y_0)$,
-    we got $f(x_0) < f(y) < f(y_0)$, by $x \in (x_0, y)$, we got $f(x_0) < f(x) < f(y)$.
+    Similarly, we can show that $f(x) > f(y_0)$ is impossible.
 
-    Further more, we can extend $[x_0, y_0]$ to $[x_0, y_0 + \delta]$ by any $\delta > 0$,
-    and keep $f(x_0) < f(y_0 + \delta)$. Because if $f(y_0 + \delta) < f(x_0)$, 
-    shows $-f(x_0) < - f(y_0 + \delta)$, but $-f(y_0) < -f(x_0)$, be contradict with our previous conclusion. 
+    Now we can prove that $f$ is strictly increasing on any interval $[x_0, y_0]$ where $f(x_0) < f(y_0)$. 
+    For $x < y$ with $x,y \in (x_0, y_0)$, we have shown that $f(x_0) < f(y) < f(y_0)$ and $f(x_0) < f(x) < f(y_0)$.
+    By applying the same argument to the interval $[x, y]$, we get $f(x) < f(y)$.
+
+    Furthermore, we can extend any interval $[x_0, y_0]$ to cover all of $\mathbb{R}$, and the monotonicity property is preserved.
+    If $f$ were not globally monotone, there would be points where it changes direction, contradicting the local monotonicity we have established. 
 
     Similarly, we can extend $[x_0, y_0]$ to $[x_0 - \delta, y_0]$. Combine above, we can extend $[x_0, y_0]$
     to cover every point in $\mathbb{R}$.
@@ -641,66 +650,66 @@ Therefore our assumption was false, and $f$ must be injective on $\mathbb{Q}$.
 \end{proof}
 
 \begin{exercise}
-    Let $f: X \to Y,\: g: Y \to X$, if $\forall x \in X, g(f(x)) = x$, then $g$ is surjective 
-    while $f$ is injective.
-\end{exercise}
+    Let $f: X \to Y$ and $g: Y \to X$. If $g(f(x)) = x$ for all $x \in X$, then $g$ is surjective 
+    and $f$ is injective.
+\end{exercise>
 
 \begin{proof}
-   $f$ is injective obviously, otherwise if $f(x_1) = f(x_2) = y$, then $h(x_1) = h(x_2) = g(y)$, which is contradict with
-   $h$ is injective.
+   $f$ is injective: If $f(x_1) = f(x_2) = y$, then $x_1 = g(f(x_1)) = g(y) = g(f(x_2)) = x_2$.
 
-   $g$ is also surjective, if exists $x \in X$ and $x \notin g(Y)$. Then we got $h(x) \ne x$ since $x \notin g(Y)$
+   $g$ is surjective: For any $x \in X$, we have $x = g(f(x))$, so $x \in g(Y)$. Therefore $X \subseteq g(Y)$, which means $g$ is surjective.
 \end{proof}
 
 \begin{exercise}
-    Any vector space has a basis.
-\end{exercise}
+    Every vector space has a basis.
+\end{exercise>
 
 \begin{proof}
-   Consider vector space $V$, which is not zero space. Let $E$ contains  
-   all linearly independent subset of $V$. Consider $\subseteq$ as partial order.
-   For any total order chain $C$, define 
+   Consider a vector space $V$ that is not the zero space. Let $\mathcal{E}$ be the collection of 
+   all linearly independent subsets of $V$. Order $\mathcal{E}$ by inclusion $\subseteq$.
+   
+   For any totally ordered chain $C \subseteq \mathcal{E}$, define 
 
    \[
         W = \bigcup_{U \in C} U
    \]
 
-   We will show $W$ is linearly independent. Assume $x_1, x_2, \dots, x_n \in W$, and exists $c_1,c_2,\dots c_n$ such that
+   We will show that $W$ is linearly independent. Suppose $x_1, x_2, \ldots, x_n \in W$ and there exist scalars $c_1,c_2,\ldots, c_n$ such that
 
    \[
-    c_1x_1 + c_2 x_2 + \dots + c_n x_n = 0
+    c_1x_1 + c_2 x_2 + \cdots + c_n x_n = 0
    \]
 
-    Since $x_i \in U_i,\: 1 \le i \le n$, for some linearly independent subset $U_i$. 
-    By $W$ is totally ordered, there exists $U'$ which is the 
-    maximum element in $U_1,U_2,\dots ,U_n$. Since $x_i \in U', \: \forall 1 \le i \le n$, 
-    and $U'$ is linearly independent, we got $c_1 = c_2 = \dots = c_n = 0$
+    Since $x_i \in U_i$ for some linearly independent subset $U_i \in C$ and $C$ is totally ordered, there exists $U'$ that is the 
+    maximum element among $U_1,U_2,\ldots ,U_n$. Since $x_i \in U'$ for all $1 \le i \le n$ 
+    and $U'$ is linearly independent, we must have $c_1 = c_2 = \cdots = c_n = 0$.
 
 \end{proof}
 
 \begin{exercise}
-    Let $f: \mathbb{R} \to \mathbb{R}$, consider set
+    Let $f: \mathbb{R} \to \mathbb{R}$. Consider the set
 
     \[
-        A = \{x \in \mathbb{R}: \lim_{x \to \infty} f(x) = \infty \}
+        A = \{x \in \mathbb{R}: \lim_{t \to \infty} f(t) = \infty \text{ as } t \to x\}
     \]
 
-    Then $A$ is countable
+    Then $A$ is countable.
 \end{exercise}
 
 \begin{proof}
     Define
 
     \[
-        E_N = A \cap {x \in \mathbb{R}: f(x) < N} \quad N = 0,1,2, \dots
+        E_N = A \cap \{x \in \mathbb{R}: |f(x)| < N\} \quad \text{for } N = 1,2,3, \ldots
     \]
 
-    We will show each $E_N$ is isolated and hence countable.
+    We will show that each $E_N$ has no accumulation points and is hence countable.
 
-    Assume exists $E_N$ which has at least one accumulation point. Pick $x' \in E_N$ and sequence $x_n \to x', x_n \ne x'$.
-    Since $f$ has limit of $\infty$ at $x'$, we got $f(x_n) \to \infty$ here, which   
-    contradicts $f(x_n) \le N$.
+    Suppose for contradiction that $E_N$ has an accumulation point $x'$. Then there exists a sequence $x_n \to x'$ with $x_n \ne x'$ and $x_n \in E_N$ for all $n$.
+    Since $x' \in A$, we have $\lim_{t \to x'} f(t) = \infty$. By continuity considerations, for sufficiently large $n$, we would have $|f(x_n)| \to \infty$. 
+    But this contradicts $|f(x_n)| < N$ for all $n$.
 
-    After all, each $E_N$ is countable and $A$ is countable union of $E_N$ and hence countable.
+    Therefore each $E_N$ is discrete and hence countable. Since $A = \bigcup_{N=1}^{\infty} E_N$, 
+    we conclude that $A$ is a countable union of countable sets and hence countable.
 
 \end{proof}

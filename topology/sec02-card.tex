@@ -457,6 +457,103 @@ $\mathrm{card}(X)<\mathrm{card}(\mathscr{P}(X))$.
 
 \end{proof}
 
+\begin{thm}
+    Assume $\mathcal{P}$ is power set of $\mathbb{N}$
+
+    \begin{enumerate}
+        \item $\mathrm{card}(\mathcal{P} \times \mathcal{P}) = \mathrm{card}(\mathcal{P})$
+
+        \item If $\mathrm{card}(A) \le \mathfrak{c}$ and $\forall \alpha \in A, \mathrm{card}(X_{\alpha}) \le \mathfrak{c}$ Then 
+        
+        \[
+        \mathrm{card} \Bigg( \bigcup_{\alpha \in A} X_{\alpha} \Bigg) \le \mathfrak{c} 
+        \]
+        
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    \begin{enumerate}
+        \item  Define $\varphi: \mathbb{N} \to \mathbb{N}, \varphi(n) = 2n$ and $\phi: \mathbb{N} \to \mathbb{N}, \phi(n) = 2n + 1$
+    and $f: \mathcal{P} \times \mathcal{P} \to \mathcal{P}$, where $f(A, B) = \varphi(A) \cup \phi(B)$
+
+        \item Define
+
+        \[
+            X = \bigcup_{\alpha \in A}X_{\alpha}
+        \]
+
+        For every $x \in X$ exists $\alpha \in I$ such that $x \in X_{\alpha}$, by \cref{4ed30899} (axiom of choice).
+        There exists $\beta: X \to A $ and $x \in X_{\beta(x)}$.
+
+        By $\mathrm{card}(X_{\alpha}) \le \mathfrak{c}$ and $\mathrm{card}(A) \le \mathbb{R}$, there exists injection $g_{\alpha}: X_{\alpha} \to \mathbb{R}$
+        and injection $f: A \to \mathbb{R}$.
+
+        And we define $h: X \to \mathbb{R} \times \mathbb{R}$ as
+
+        \[
+            h(x) = \Big( f(\beta(x)), g_{\beta(x)}(x) \Big)
+        \]
+
+        Assume $x_1 \ne x_2$, one of $\beta(x_1) \ne \beta(x_2),\: g_{\beta(x_1)}(x_1) \ne g_{\beta{(x_2)}}(x_2)$ should satisfy.
+        So  $h$ is a injection from $X$ to $\mathbb{R} \times \mathbb{R}$, and hence
+
+        \[
+            \mathrm{card}(X) \le \mathfrak{c}
+        \]
+    \end{enumerate}
+\end{proof}
+
+\begin{corollary}
+    $\mathrm{card}(\mathbb{R}^2) = \mathfrak{c}$
+\end{corollary}
+
+\subsection{Well Ordered Sets}
+
+\begin{thm}[The Principle of Transfinite Induction]
+    Let $X$ be a well ordered set. If $A$ is a subset
+    of $X$ such that $x \in A$ whenever $I_x \subseteq A$, then $A = X$
+
+    $I_x$ here is defined as:
+
+    \[
+        I_x = \{ y \in X: y < x  \}
+    \]
+\end{thm}
+
+\begin{proof}
+    Assume $A \ne X$, and thus $X \setminus A \ne \emptyset$, pick 
+
+    \[
+        x_0 = \min X \setminus A
+    \]
+
+    By $I_{x_0} \subseteq A$, we got $x_0 \in A$, which contradicts $x_0 \in X \setminus A$.
+\end{proof}
+
+\begin{example}
+    Consider $X = \{ 0,1,2, \dots \}$ and $A = \{ 1,2,3, \dots \}$. 
+
+    The $A$ does not meet $\forall x \in X, I_x \subseteq A \Rightarrow x \in A$. Because $I_0$
+    is empty set when $x=0$, and $I_0 \subseteq A$ while $0 \notin A$.
+\end{example}
+
+\begin{thm}
+    If $X$ is well ordered and $A \subseteq X$, then $\bigcup_{x \in A} I_x$
+    is either an initial segment or $X$ itself.
+\end{thm}
+
+\begin{proof}
+    Let 
+    
+    \begin{align*}
+        J &= \bigcup_{x \in A} I_x \\
+    \end{align*}
+
+    If $J \ne X$, let $b = \min X \setminus J$, $B = \{ x \in X: b \le x \}$. We will prove $X \setminus J = B$.
+
+\end{proof}
+
 \subsection{Exercise}
 
 \begin{exercise}

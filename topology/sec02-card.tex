@@ -365,7 +365,96 @@ $\mathrm{card}(X)<\mathrm{card}(\mathscr{P}(X))$.
 \end{thm}
 
 \begin{proof}
-    $A$ is infinite and $\mathrm{card}(\mathbb{N}) \le \mathrm{card}(A)$ by \cref{8e545ca3}.
+    We just need to prove $A_1 \times A_2$ is countable, then finite case could be proved by induction.
+    $A_1 \times A_2$ is infinite and $\mathrm{card}(\mathbb{N}) \le \mathrm{card}(A_1 \times A_2)$ by \cref{8e545ca3}.
+    And we can make a injection from $A_1 \times A_2 \to \mathbb{N}$ by
+
+    \[
+        f(a_n, b_m) = \binom{n+m + 1}{2} + m
+    \]
+
+    Consider when $n_1 + m_1 > n_2 + m_2$
+
+    \begin{align*}
+        \binom{n_1 + m_1 + 1}{2} -\binom{n_2 + m_2 + 1}{2} + m_1 - m_2 & \ge \binom{n_1 + m_1+1}{2} -\binom{n_1 + m_1}{2} + m_1 - m_2 \\
+        & \ge n_1 + m_1  + m_1 - m_2 \ge n_2 + m_2  + 1 + m_1 - m_2 \\
+        & \ge n_2 + m_1 +1 > 0
+    \end{align*}
+
+    when $n_1 + m_1 = n_2 + m_2$, must have $m_1 \ne m_2$
+
+    After all $f$ is injection, and hence $\mathrm{card}(A_1 \times A_2) \le \mathbb{N}$
+\end{proof}
+
+\begin{thm}
+    Countable union of countable sets is countable.
+\end{thm}
+
+\begin{proof}
+    Assume $A_0,A_1,\dots $ is a sequence of countable sets. Define
+
+    \[
+        A = \bigcup_{i=0}^{\infty} A_i
+    \]
+
+    And there exists a bijection $f_i: \mathbb{N} \to A_i$ for every $A_i$
+
+    and $h: \mathbb{N} \times \mathbb{N} \to A$ as:
+
+    \[
+        h(n,m) = f_n (m)
+    \]
+
+    Then $h$ is a surjection, by $\mathrm{card}(\mathbb{N} \times \mathbb{N}) = \mathrm{card}(\mathbb{N})$ , and
+    $\mathrm{card}(A) \le \mathrm{card}(\mathbb{N} \times \mathbb{N})$, we got
+    $\mathrm{card}(A) = \mathrm{card}(\mathbb{N})$
+\end{proof}
+
+\begin{definition}[cardinality of the continuum]
+    The cardinality of the continuum $\mathfrak{c}$ is defined as $\mathrm{card}(\mathbb{R})$
+\end{definition}
+
+\begin{thm}
+    The cardinality of $\mathbb{N}$'s power set $\mathcal{P}$ is $\mathfrak{c}$
+\end{thm}
+
+\begin{proof}
+    We will first show $\mathrm{card}(\mathcal{P}) = \mathrm{card}([0,1])$, since $\mathrm{card}([0,1]) = \mathrm{card}(\mathbb{R})$ by function
+
+    \[
+        h(x) = \frac{\mathrm{tanh}(x) + 1}{2}
+    \]
+
+    which is a bijection between $\mathbb{R}$ and $(0,1)$, then $\mathrm{card}([0,1]) \le \mathrm{card}(\mathbb{R})$
+    by  injective identity function, and $\mathrm{card}(\mathbb{R}) = \mathrm{card}((0,1)) \le \mathrm{card}([0,1])$ 
+    by $h$ and identity.
+
+    For any $E \subseteq \mathbb{N}$, define $g: \mathcal{P} \to \mathbb{R}$ as
+
+    \[
+        g(E) = \sum_{n \in E} 10^{-n}
+    \]
+
+    Then $g$ is a injection, for any $E_1 \ne E_2$ we can pick $n = \min ( E_1 \Delta E_2 )$, and 
+    
+    \[
+        \left| g(E_1) - g(E_2)\right| \ge 10^{-n} - 10^{-n-1} \cdot \frac{10}{9} \ge 10^{-n} \cdot \frac{8}{9} > 0
+    \]
+
+    which shows $\mathrm{card}(\mathcal{P}) \le \mathrm{card}(\mathbb{R})$
+
+    We can also define another injection $g'(x): [0,1] \to \mathcal{P}$ as
+
+    \begin{align*}
+        a_0 &= [x],\: r_0 = 2(x - a_0) \\
+        a_1 &= [r_0],\: r_1 = 2(r_0 - a_1) \\
+        \dots & \\
+        g'(x) &= \{ i: a_i = 1 \} \\
+        x &= a_0  + a_1 c^{1} + a_2 c^{2} + \dots  \quad c = \frac{1}{2}
+    \end{align*}
+
+    For any $x <y,\: x,y \in [0,1]$, we must have $g'(x) \subseteq g'(y)$ and  $g'(x) \ne g'(y)$.
+
 \end{proof}
 
 \subsection{Exercise}

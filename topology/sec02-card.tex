@@ -136,12 +136,14 @@
 \end{thm}
 
 \begin{proof}
-    Given a family of nonempty sets $\{A_{\alpha}: \alpha \in I \}$. Since $A_{\alpha}$ could be well-ordered by 
-    relation $\le_{\alpha}$, thus we define $f: \alpha \to \bigcup_{\alpha \in I} A_{\alpha}$ as
+    Given a family of nonempty sets $\{A_{\alpha}: \alpha \in I \}$. Since each $A_{\alpha}$ can be well-ordered by 
+    some relation $\le_{\alpha}$, we define $f: I \to \bigcup_{\alpha \in I} A_{\alpha}$ by
 
     \[
-        f(\alpha) = \min \{ A_{\alpha} \} \quad \text{by } \le_{\alpha} 
+        f(\alpha) = \min A_{\alpha} \quad \text{with respect to } \le_{\alpha}
     \]
+    
+    Then $f(\alpha) \in A_{\alpha}$ for every $\alpha \in I$, which provides the desired choice function.
 \end{proof}
 
 \begin{thm}
@@ -150,26 +152,24 @@
 
 \begin{proof}
     For the sake of contradiction, assume $A$ does not contain any maximal element.
-    By Axiom of Choice, there exists function $f: A \to A$ and $\forall a \in A,\: a < f(a)$.
+    By the Axiom of Choice, there exists a function $f: A \to A$ such that $a < f(a)$ for all $a \in A$.
 
-    We will construct a injection from Ord $\to A$, and this will violates that Ord is a proper class.
+    We will construct an injection from $\mathrm{Ord} \to A$, which contradicts the fact that $\mathrm{Ord}$ is a proper class.
 
-    To construct such injection, we will start with $\alpha_0 \in \mathrm{Ord}$ by picking any $a_0 \in A$.
-
-    We define the following, where $\lambda$ denotes any limit ordinal:
+    To construct such an injection, we start with any $a_0 \in A$ and define $h: \mathrm{Ord} \to A$ recursively, where $\lambda$ denotes any limit ordinal:
 
     \begin{align*}
-        h(\alpha_0) &= a_0 \\
+        h(0) &= a_0 \\
         h(\alpha + 1) &= f(h(\alpha)) \\
-        h(\lambda) & = f(u) \quad u \text{ is upper bound of } \{ h(\beta): \beta < \lambda \}
+        h(\lambda) &= f(u) \quad \text{where } u \text{ is an upper bound of } \{ h(\beta): \beta < \lambda \}
     \end{align*}
 
-    $h$ is well defined, since $\{ h(\beta): \beta < \lambda \}$ is totally ordered, and hence has an upper bound.
+    The function $h$ is well-defined, since $\{ h(\beta): \beta < \lambda \}$ is totally ordered and hence has an upper bound.
 
-    After all, the injection $h$ violates that Ord is a proper class, so $A$ must have a maximal element.
+    However, the existence of such an injection $h$ contradicts the fact that $\mathrm{Ord}$ is a proper class. Therefore, $A$ must contain a maximal element.
 \end{proof}
 
-\subsection{cardinality}
+\subsection{Cardinality}
 
 \begin{definition}
     If $X$ and $Y$ are nonempty sets, we define the expressions
@@ -202,7 +202,7 @@ that the relationships defined above enjoy the properties that the notation sugg
 \end{definition}
 
 \begin{prop}
-$\mathrm{card}(X) \le \mathrm{card}(Y)$ iff $\mathrm{card}(Y) \ge \mathrm{card}(X)$
+$\mathrm{card}(X) \le \mathrm{card}(Y)$ if and only if $\mathrm{card}(Y) \ge \mathrm{card}(X)$.
 \end{prop}
 
 \begin{proof}
@@ -247,43 +247,43 @@ $\mathrm{card}(Y) \leq \mathrm{card}(X)$.
 \end{proof}
 
 \begin{thm}\label{5dd1cdb2}
-    If exists $f: X \to Y$ and $g: Y \to X$, then $X$ could be divide as disjoint union $A \cup \tilde{A}$, and 
-    $Y$ could be divide as disjoint union $B \cup \tilde{B}$, such that $f(A) = B,\: g(\tilde{B}) = \tilde{A}$
+    If there exist functions $f: X \to Y$ and $g: Y \to X$, then $X$ can be partitioned as a disjoint union $A \cup \tilde{A}$, and 
+    $Y$ can be partitioned as a disjoint union $B \cup \tilde{B}$, such that $f(A) = B$ and $g(\tilde{B}) = \tilde{A}$.
 \end{thm}
 
 \begin{proof}
-    consider set function $h: \mathscr{P}(X) \to \mathscr{P}(X)$
+    Consider the set function $h: \mathscr{P}(X) \to \mathscr{P}(X)$ defined by
 
     \[
         h(E) =  X \setminus g(Y \setminus f(E)) 
     \]
 
-    Since $h$ is monotone increasing, there exists fixed point $A \subseteq X$ and
+    Since $h$ is monotone increasing, there exists a fixed point $A \subseteq X$ such that
 
     \begin{align*}
-        A &= h(A) = \bigcup \{ E: E \subseteq h(E) \} \\
+        A &= h(A) = \bigcup \{ E: E \subseteq h(E) \}
     \end{align*}
 
-    where $E \subseteq h(E)$ is equivalent to $E \cap g(Y \setminus f(E)) = \emptyset$,
-    by $A = h(A)$, shows $A \cap g(Y \setminus f(A)) = \emptyset$.
+    where $E \subseteq h(E)$ is equivalent to $E \cap g(Y \setminus f(E)) = \emptyset$.
+    Since $A = h(A)$, we have $A \cap g(Y \setminus f(A)) = \emptyset$.
 
-    Now, define $B = f(A),\: \tilde{B} = Y \setminus B$.
+    Now, define $B = f(A)$ and $\tilde{B} = Y \setminus B$.
 
-    It is obviously that $A \cap g(\tilde{B}) = \emptyset$ by
+    It follows that $A \cap g(\tilde{B}) = \emptyset$ because
 
     \[
         A \cap g(Y \setminus B) =  A \cap g(Y \setminus f(A)) = \emptyset
     \]
 
-    And thus $g(\tilde{B}) \subseteq X \setminus A$, assume $x_0 \in X \setminus A$, while $x_0 \notin g(\tilde{B})$,
-    Put $A_0 = A \cup \{ x_0 \}$, Then
+    Thus $g(\tilde{B}) \subseteq X \setminus A$. Suppose for contradiction that there exists $x_0 \in X \setminus A$ such that $x_0 \notin g(\tilde{B})$.
+    Let $A_0 = A \cup \{ x_0 \}$. Then
 
     \begin{align*}
         A_0 \cap g(Y \setminus f(A_0)) & \subseteq A_0  \cap g(Y \setminus f(A)) \\
         & \subseteq \emptyset 
     \end{align*}
 
-    It is contradict with $A$ is maximal set which satisfy $A \subseteq h(A)$
+    This contradicts the maximality of $A$ among sets satisfying $A \subseteq h(A)$.
 
 \end{proof}
 
@@ -293,23 +293,23 @@ $\mathrm{card}(Y) \leq \mathrm{card}(X)$.
 \end{thm}
 
 \begin{proof}
-    Let $f: X \to Y$ and $g: Y \to X$ both be injection.
-    By \cref{5dd1cdb2}, we can divide $X$ as disjoint union $A \cup \tilde{A}$, and $Y$
-    as disjoin union $B \cup \tilde{B}$, such that $f(A) = B,\: g(\tilde{B}) = \tilde{A}$.
+    Let $f: X \to Y$ and $g: Y \to X$ both be injections.
+    By \cref{5dd1cdb2}, we can partition $X$ as a disjoint union $A \cup \tilde{A}$, and $Y$
+    as a disjoint union $B \cup \tilde{B}$, such that $f(A) = B$ and $g(\tilde{B}) = \tilde{A}$.
 
-    Now, let's define $h: X \to Y$ as
+    Now, define $h: X \to Y$ by
 
     \begin{align*}
         h(x) = \begin{cases}
-            f(x) & x \in A\\
-            g^{-1}(x) & x \in \tilde{A}
+            f(x) & \text{if } x \in A\\
+            g^{-1}(x) & \text{if } x \in \tilde{A}
         \end{cases}
     \end{align*}
 
-    This is a well define because $g$ is bijection on $\tilde{B} \to \tilde{A}$, hence has inverse.
+    This is well-defined because $g$ restricted to $\tilde{B}$ is a bijection onto $\tilde{A}$, so it has an inverse.
 
-    Then $h$ is injection, since $f(A) \cap g^{-1}(\tilde{A}) = B \cap \tilde{B} = \emptyset$. $h$
-    is surjection by $h(X) = h(A \cup \tilde{A}) = h(A) \cup h(\tilde{A}) = B \cup \tilde{B} = Y$
+    Then $h$ is an injection, since $f(A) \cap g^{-1}(\tilde{A}) = B \cap \tilde{B} = \emptyset$. Moreover, $h$
+    is a surjection because $h(X) = h(A \cup \tilde{A}) = h(A) \cup h(\tilde{A}) = B \cup \tilde{B} = Y$.
 \end{proof}
 
 \begin{prop}
@@ -343,37 +343,41 @@ $\mathrm{card}(X)<\mathrm{card}(\mathscr{P}(X))$.
 
 
 \begin{thm}\label{8e545ca3}
-    If set $A$ is infinite, then $\mathrm{card}(\mathbb{N}) \le \mathrm{card}(A)$
+    If a set $A$ is infinite, then $\mathrm{card}(\mathbb{N}) \le \mathrm{card}(A)$.
 \end{thm}
 
 \begin{proof}
-    We can pick $a_0,a_1,a_2,\dots$ from $A$, and define surjection $f: A \to \mathbb{N}$ as
+    Since $A$ is infinite, we can choose a sequence of distinct elements $a_0,a_1,a_2,\ldots$ from $A$. 
+    Define $f: A \to \mathbb{N}$ by
 
     \[
-        f(a_i) = i
+        f(a_i) = i \quad \text{for } i \in \mathbb{N}
     \]
+    
+    and $f(a) = 0$ for any $a \in A$ not in the sequence. Then $f$ is a surjection, 
+    which shows $\mathrm{card}(\mathbb{N}) \le \mathrm{card}(A)$.
 \end{proof}
 
 \begin{thm}
-    If $A_1,A_2,\dots, A_n$ is a finite sequence of countable sets. Then
+    If $A_1,A_2,\ldots, A_n$ is a finite sequence of countable sets, then
 
     \[
-        A = A_1 \times A_2 \times \dots \times A_n
+        A = A_1 \times A_2 \times \cdots \times A_n
     \]
 
-    is countable
+    is countable.
 \end{thm}
 
 \begin{proof}
-    We just need to prove $A_1 \times A_2$ is countable, then finite case could be proved by induction.
-    $A_1 \times A_2$ is infinite and $\mathrm{card}(\mathbb{N}) \le \mathrm{card}(A_1 \times A_2)$ by \cref{8e545ca3}.
-    And we can make a injection from $A_1 \times A_2 \to \mathbb{N}$ by
+    It suffices to prove that $A_1 \times A_2$ is countable, as the general finite case follows by induction.
+    Note that $A_1 \times A_2$ is infinite, so $\mathrm{card}(\mathbb{N}) \le \mathrm{card}(A_1 \times A_2)$ by \cref{8e545ca3}.
+    We can construct an injection from $A_1 \times A_2$ to $\mathbb{N}$ by
 
     \[
         f(a_n, b_m) = \binom{n+m + 1}{2} + m
     \]
 
-    Consider when $n_1 + m_1 > n_2 + m_2$
+    To verify injectivity, consider when $n_1 + m_1 > n_2 + m_2$:
 
     \begin{align*}
         \binom{n_1 + m_1 + 1}{2} -\binom{n_2 + m_2 + 1}{2} + m_1 - m_2 & \ge \binom{n_1 + m_1+1}{2} -\binom{n_1 + m_1}{2} + m_1 - m_2 \\
@@ -381,92 +385,92 @@ $\mathrm{card}(X)<\mathrm{card}(\mathscr{P}(X))$.
         & \ge n_2 + m_1 +1 > 0
     \end{align*}
 
-    when $n_1 + m_1 = n_2 + m_2$, must have $m_1 \ne m_2$
+    When $n_1 + m_1 = n_2 + m_2$, we must have $m_1 \ne m_2$ for distinct pairs.
 
-    After all $f$ is injection, and hence $\mathrm{card}(A_1 \times A_2) \le \mathbb{N}$
+    Therefore $f$ is an injection, and hence $\mathrm{card}(A_1 \times A_2) \le \mathrm{card}(\mathbb{N})$.
 \end{proof}
 
 \begin{thm}
-    Countable union of countable sets is countable.
+    A countable union of countable sets is countable.
 \end{thm}
 
 \begin{proof}
-    Assume $A_0,A_1,\dots $ is a sequence of countable sets. Define
+    Let $A_0,A_1,A_2,\ldots$ be a sequence of countable sets. Define
 
     \[
         A = \bigcup_{i=0}^{\infty} A_i
     \]
 
-    And there exists a bijection $f_i: \mathbb{N} \to A_i$ for every $A_i$
+    Since each $A_i$ is countable, there exists a bijection $f_i: \mathbb{N} \to A_i$ for every $i$.
 
-    and $h: \mathbb{N} \times \mathbb{N} \to A$ as:
+    Define $h: \mathbb{N} \times \mathbb{N} \to A$ by:
 
     \[
         h(n,m) = f_n (m)
     \]
 
-    Then $h$ is a surjection, by $\mathrm{card}(\mathbb{N} \times \mathbb{N}) = \mathrm{card}(\mathbb{N})$ , and
-    $\mathrm{card}(A) \le \mathrm{card}(\mathbb{N} \times \mathbb{N})$, we got
-    $\mathrm{card}(A) = \mathrm{card}(\mathbb{N})$
-\end{proof}
+    Then $h$ is a surjection. Since $\mathrm{card}(\mathbb{N} \times \mathbb{N}) = \mathrm{card}(\mathbb{N})$ and
+    $\mathrm{card}(A) \le \mathrm{card}(\mathbb{N} \times \mathbb{N})$, we conclude that
+    $\mathrm{card}(A) = \mathrm{card}(\mathbb{N})$.
+\end{proof>
 
-\begin{definition}[cardinality of the continuum]
-    The cardinality of the continuum $\mathfrak{c}$ is defined as $\mathrm{card}(\mathbb{R})$
+\begin{definition}[Cardinality of the continuum]
+    The cardinality of the continuum $\mathfrak{c}$ is defined as $\mathrm{card}(\mathbb{R})$.
 \end{definition}
 
 \begin{thm}
-    The cardinality of $\mathbb{N}$'s power set $\mathcal{P}$ is $\mathfrak{c}$
+    The cardinality of the power set $\mathcal{P}(\mathbb{N})$ is $\mathfrak{c}$.
 \end{thm}
 
 \begin{proof}
-    We will first show $\mathrm{card}(\mathcal{P}) = \mathrm{card}([0,1])$, since $\mathrm{card}([0,1]) = \mathrm{card}(\mathbb{R})$ by function
+    We will show $\mathrm{card}(\mathcal{P}(\mathbb{N})) = \mathrm{card}([0,1])$. Since $\mathrm{card}([0,1]) = \mathrm{card}(\mathbb{R})$ by the function
 
     \[
-        h(x) = \frac{\mathrm{tanh}(x) + 1}{2}
+        h(x) = \frac{\tanh(x) + 1}{2}
     \]
 
-    which is a bijection between $\mathbb{R}$ and $(0,1)$, then $\mathrm{card}([0,1]) \le \mathrm{card}(\mathbb{R})$
-    by  injective identity function, and $\mathrm{card}(\mathbb{R}) = \mathrm{card}((0,1)) \le \mathrm{card}([0,1])$ 
-    by $h$ and identity.
+    which is a bijection between $\mathbb{R}$ and $(0,1)$, we have $\mathrm{card}([0,1]) \le \mathrm{card}(\mathbb{R})$
+    by the injective identity function, and $\mathrm{card}(\mathbb{R}) = \mathrm{card}((0,1)) \le \mathrm{card}([0,1])$ 
+    by $h$ and the identity function.
 
-    For any $E \subseteq \mathbb{N}$, define $g: \mathcal{P} \to \mathbb{R}$ as
+    For any $E \subseteq \mathbb{N}$, define $g: \mathcal{P}(\mathbb{N}) \to \mathbb{R}$ by
 
     \[
         g(E) = \sum_{n \in E} 10^{-n}
     \]
 
-    Then $g$ is a injection, for any $E_1 \ne E_2$ we can pick $n = \min ( E_1 \Delta E_2 )$, and 
+    Then $g$ is an injection. For any $E_1 \ne E_2$, we can choose $n = \min ( E_1 \triangle E_2 )$, and then
     
     \[
         \left| g(E_1) - g(E_2)\right| \ge 10^{-n} - 10^{-n-1} \cdot \frac{10}{9} \ge 10^{-n} \cdot \frac{8}{9} > 0
     \]
 
-    which shows $\mathrm{card}(\mathcal{P}) \le \mathrm{card}(\mathbb{R})$
+    which shows $\mathrm{card}(\mathcal{P}(\mathbb{N})) \le \mathrm{card}(\mathbb{R})$.
 
-    We can also define another injection $g'(x): [0,1] \to \mathcal{P}$ as
+    We can also define an injection $g': [0,1] \to \mathcal{P}(\mathbb{N})$ as follows:
 
     \begin{align*}
-        a_0 &= [x],\: r_0 = 2(x - a_0) \\
-        a_1 &= [r_0],\: r_1 = 2(r_0 - a_1) \\
-        \dots & \\
+        a_0 &= \lfloor x \rfloor,\: r_0 = 2(x - a_0) \\
+        a_1 &= \lfloor r_0 \rfloor,\: r_1 = 2(r_0 - a_1) \\
+        &\vdots \\
         g'(x) &= \{ i: a_i = 1 \} \\
-        x &= a_0  + a_1 c^{1} + a_2 c^{2} + \dots  \quad c = \frac{1}{2}
+        x &= a_0  + a_1 \cdot \frac{1}{2} + a_2 \cdot \frac{1}{4} + \cdots
     \end{align*}
 
-     The mapping $g'(x)$ is injective, i.e., for $x \neq y$ in $[0,1]$, we have $g'(x) \neq g'(y)$. However, in general, $g'(x) \subseteq g'(y)$ does not hold for $x < y$.
+    The mapping $g'$ is injective: for $x \neq y$ in $[0,1]$, we have $g'(x) \neq g'(y)$ since distinct real numbers have distinct binary expansions (up to the usual non-uniqueness issue, which can be handled carefully).
 
 \end{proof}
 
 \begin{thm}
-    Assume $\mathcal{P}$ is power set of $\mathbb{N}$
+    Let $\mathcal{P}(\mathbb{N})$ denote the power set of $\mathbb{N}$.
 
     \begin{enumerate}
-        \item $\mathrm{card}(\mathcal{P} \times \mathcal{P}) = \mathrm{card}(\mathcal{P})$
+        \item $\mathrm{card}(\mathcal{P}(\mathbb{N}) \times \mathcal{P}(\mathbb{N})) = \mathrm{card}(\mathcal{P}(\mathbb{N}))$
 
-        \item If $\mathrm{card}(A) \le \mathfrak{c}$ and $\forall \alpha \in A, \mathrm{card}(X_{\alpha}) \le \mathfrak{c}$ Then 
+        \item If $\mathrm{card}(A) \le \mathfrak{c}$ and $\mathrm{card}(X_{\alpha}) \le \mathfrak{c}$ for all $\alpha \in A$, then 
         
         \[
-        \mathrm{card} \Bigg( \bigcup_{\alpha \in A} X_{\alpha} \Bigg) \le \mathfrak{c} 
+        \mathrm{card} \left( \bigcup_{\alpha \in A} X_{\alpha} \right) \le \mathfrak{c} 
         \]
         
     \end{enumerate}

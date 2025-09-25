@@ -136,12 +136,14 @@
 \end{thm}
 
 \begin{proof}
-    Given a family of nonempty sets $\{A_{\alpha}: \alpha \in I \}$. Since $A_{\alpha}$ could be well-ordered by 
-    relation $\le_{\alpha}$, thus we define $f: \alpha \to \bigcup_{\alpha \in I} A_{\alpha}$ as
+    Given a family of nonempty sets $\{A_{\alpha}: \alpha \in I \}$. Since each $A_{\alpha}$ can be well-ordered by 
+    some relation $\le_{\alpha}$, we define $f: I \to \bigcup_{\alpha \in I} A_{\alpha}$ by
 
     \[
-        f(\alpha) = \min \{ A_{\alpha} \} \quad \text{by } \le_{\alpha} 
+        f(\alpha) = \min A_{\alpha} \quad \text{with respect to } \le_{\alpha}
     \]
+    
+    Then $f(\alpha) \in A_{\alpha}$ for every $\alpha \in I$, which provides the desired choice function.
 \end{proof}
 
 \begin{thm}
@@ -150,26 +152,24 @@
 
 \begin{proof}
     For the sake of contradiction, assume $A$ does not contain any maximal element.
-    By Axiom of Choice, there exists function $f: A \to A$ and $\forall a \in A,\: a < f(a)$.
+    By the Axiom of Choice, there exists a function $f: A \to A$ such that $a < f(a)$ for all $a \in A$.
 
-    We will construct a injection from Ord $\to A$, and this will violates that Ord is a proper class.
+    We will construct an injection from $\mathrm{Ord} \to A$, which contradicts the fact that $\mathrm{Ord}$ is a proper class.
 
-    To construct such injection, we will start with $\alpha_0 \in \mathrm{Ord}$ by picking any $a_0 \in A$.
-
-    We define the following, where $\lambda$ denotes any limit ordinal:
+    To construct such an injection, we start with any $a_0 \in A$ and define $h: \mathrm{Ord} \to A$ recursively, where $\lambda$ denotes any limit ordinal:
 
     \begin{align*}
-        h(\alpha_0) &= a_0 \\
+        h(0) &= a_0 \\
         h(\alpha + 1) &= f(h(\alpha)) \\
-        h(\lambda) & = f(u) \quad u \text{ is upper bound of } \{ h(\beta): \beta < \lambda \}
+        h(\lambda) &= f(u) \quad \text{where } u \text{ is an upper bound of } \{ h(\beta): \beta < \lambda \}
     \end{align*}
 
-    $h$ is well defined, since $\{ h(\beta): \beta < \lambda \}$ is totally ordered, and hence has an upper bound.
+    The function $h$ is well-defined, since $\{ h(\beta): \beta < \lambda \}$ is totally ordered and hence has an upper bound.
 
-    After all, the injection $h$ violates that Ord is a proper class, so $A$ must have a maximal element.
+    However, the existence of such an injection $h$ contradicts the fact that $\mathrm{Ord}$ is a proper class. Therefore, $A$ must contain a maximal element.
 \end{proof}
 
-\subsection{cardinality}
+\subsection{Cardinality}
 
 \begin{definition}
     If $X$ and $Y$ are nonempty sets, we define the expressions
@@ -202,7 +202,7 @@ that the relationships defined above enjoy the properties that the notation sugg
 \end{definition}
 
 \begin{prop}
-$\mathrm{card}(X) \le \mathrm{card}(Y)$ iff $\mathrm{card}(Y) \ge \mathrm{card}(X)$
+$\mathrm{card}(X) \le \mathrm{card}(Y)$ if and only if $\mathrm{card}(Y) \ge \mathrm{card}(X)$.
 \end{prop}
 
 \begin{proof}
@@ -247,43 +247,43 @@ $\mathrm{card}(Y) \leq \mathrm{card}(X)$.
 \end{proof}
 
 \begin{thm}\label{5dd1cdb2}
-    If exists $f: X \to Y$ and $g: Y \to X$, then $X$ could be divide as disjoint union $A \cup \tilde{A}$, and 
-    $Y$ could be divide as disjoint union $B \cup \tilde{B}$, such that $f(A) = B,\: g(\tilde{B}) = \tilde{A}$
+    If there exist functions $f: X \to Y$ and $g: Y \to X$, then $X$ can be partitioned as a disjoint union $A \cup \tilde{A}$, and 
+    $Y$ can be partitioned as a disjoint union $B \cup \tilde{B}$, such that $f(A) = B$ and $g(\tilde{B}) = \tilde{A}$.
 \end{thm}
 
 \begin{proof}
-    consider set function $h: \mathscr{P}(X) \to \mathscr{P}(X)$
+    Consider the set function $h: \mathscr{P}(X) \to \mathscr{P}(X)$ defined by
 
     \[
         h(E) =  X \setminus g(Y \setminus f(E)) 
     \]
 
-    Since $h$ is monotone increasing, there exists fixed point $A \subseteq X$ and
+    Since $h$ is monotone increasing, there exists a fixed point $A \subseteq X$ such that
 
     \begin{align*}
-        A &= h(A) = \bigcup \{ E: E \subseteq h(E) \} \\
+        A &= h(A) = \bigcup \{ E: E \subseteq h(E) \}
     \end{align*}
 
-    where $E \subseteq h(E)$ is equivalent to $E \cap g(Y \setminus f(E)) = \emptyset$,
-    by $A = h(A)$, shows $A \cap g(Y \setminus f(A)) = \emptyset$.
+    where $E \subseteq h(E)$ is equivalent to $E \cap g(Y \setminus f(E)) = \emptyset$.
+    Since $A = h(A)$, we have $A \cap g(Y \setminus f(A)) = \emptyset$.
 
-    Now, define $B = f(A),\: \tilde{B} = Y \setminus B$.
+    Now, define $B = f(A)$ and $\tilde{B} = Y \setminus B$.
 
-    It is obviously that $A \cap g(\tilde{B}) = \emptyset$ by
+    It follows that $A \cap g(\tilde{B}) = \emptyset$ because
 
     \[
         A \cap g(Y \setminus B) =  A \cap g(Y \setminus f(A)) = \emptyset
     \]
 
-    And thus $g(\tilde{B}) \subseteq X \setminus A$, assume $x_0 \in X \setminus A$, while $x_0 \notin g(\tilde{B})$,
-    Put $A_0 = A \cup \{ x_0 \}$, Then
+    Thus $g(\tilde{B}) \subseteq X \setminus A$. Suppose for contradiction that there exists $x_0 \in X \setminus A$ such that $x_0 \notin g(\tilde{B})$.
+    Let $A_0 = A \cup \{ x_0 \}$. Then
 
     \begin{align*}
         A_0 \cap g(Y \setminus f(A_0)) & \subseteq A_0  \cap g(Y \setminus f(A)) \\
         & \subseteq \emptyset 
     \end{align*}
 
-    It is contradict with $A$ is maximal set which satisfy $A \subseteq h(A)$
+    This contradicts the maximality of $A$ among sets satisfying $A \subseteq h(A)$.
 
 \end{proof}
 
@@ -293,23 +293,23 @@ $\mathrm{card}(Y) \leq \mathrm{card}(X)$.
 \end{thm}
 
 \begin{proof}
-    Let $f: X \to Y$ and $g: Y \to X$ both be injection.
-    By \cref{5dd1cdb2}, we can divide $X$ as disjoint union $A \cup \tilde{A}$, and $Y$
-    as disjoin union $B \cup \tilde{B}$, such that $f(A) = B,\: g(\tilde{B}) = \tilde{A}$.
+    Let $f: X \to Y$ and $g: Y \to X$ both be injections.
+    By \cref{5dd1cdb2}, we can partition $X$ as a disjoint union $A \cup \tilde{A}$, and $Y$
+    as a disjoint union $B \cup \tilde{B}$, such that $f(A) = B$ and $g(\tilde{B}) = \tilde{A}$.
 
-    Now, let's define $h: X \to Y$ as
+    Now, define $h: X \to Y$ by
 
     \begin{align*}
         h(x) = \begin{cases}
-            f(x) & x \in A\\
-            g^{-1}(x) & x \in \tilde{A}
+            f(x) & \text{if } x \in A\\
+            g^{-1}(x) & \text{if } x \in \tilde{A}
         \end{cases}
     \end{align*}
 
-    This is a well define because $g$ is bijection on $\tilde{B} \to \tilde{A}$, hence has inverse.
+    This is well-defined because $g$ restricted to $\tilde{B}$ is a bijection onto $\tilde{A}$, so it has an inverse.
 
-    Then $h$ is injection, since $f(A) \cap g^{-1}(\tilde{A}) = B \cap \tilde{B} = \emptyset$. $h$
-    is surjection by $h(X) = h(A \cup \tilde{A}) = h(A) \cup h(\tilde{A}) = B \cup \tilde{B} = Y$
+    Then $h$ is an injection, since $f(A) \cap g^{-1}(\tilde{A}) = B \cap \tilde{B} = \emptyset$. Moreover, $h$
+    is a surjection because $h(X) = h(A \cup \tilde{A}) = h(A) \cup h(\tilde{A}) = B \cup \tilde{B} = Y$.
 \end{proof}
 
 \begin{prop}
@@ -343,37 +343,41 @@ $\mathrm{card}(X)<\mathrm{card}(\mathscr{P}(X))$.
 
 
 \begin{thm}\label{8e545ca3}
-    If set $A$ is infinite, then $\mathrm{card}(\mathbb{N}) \le \mathrm{card}(A)$
+    If a set $A$ is infinite, then $\mathrm{card}(\mathbb{N}) \le \mathrm{card}(A)$.
 \end{thm}
 
 \begin{proof}
-    We can pick $a_0,a_1,a_2,\dots$ from $A$, and define surjection $f: A \to \mathbb{N}$ as
+    Since $A$ is infinite, we can choose a sequence of distinct elements $a_0,a_1,a_2,\ldots$ from $A$. 
+    Define $f: A \to \mathbb{N}$ by
 
     \[
-        f(a_i) = i
+        f(a_i) = i \quad \text{for } i \in \mathbb{N}
     \]
+    
+    and $f(a) = 0$ for any $a \in A$ not in the sequence. Then $f$ is a surjection, 
+    which shows $\mathrm{card}(\mathbb{N}) \le \mathrm{card}(A)$.
 \end{proof}
 
 \begin{thm}
-    If $A_1,A_2,\dots, A_n$ is a finite sequence of countable sets. Then
+    If $A_1,A_2,\ldots, A_n$ is a finite sequence of countable sets, then
 
     \[
-        A = A_1 \times A_2 \times \dots \times A_n
+        A = A_1 \times A_2 \times \cdots \times A_n
     \]
 
-    is countable
+    is countable.
 \end{thm}
 
 \begin{proof}
-    We just need to prove $A_1 \times A_2$ is countable, then finite case could be proved by induction.
-    $A_1 \times A_2$ is infinite and $\mathrm{card}(\mathbb{N}) \le \mathrm{card}(A_1 \times A_2)$ by \cref{8e545ca3}.
-    And we can make a injection from $A_1 \times A_2 \to \mathbb{N}$ by
+    It suffices to prove that $A_1 \times A_2$ is countable, as the general finite case follows by induction.
+    Note that $A_1 \times A_2$ is infinite, so $\mathrm{card}(\mathbb{N}) \le \mathrm{card}(A_1 \times A_2)$ by \cref{8e545ca3}.
+    We can construct an injection from $A_1 \times A_2$ to $\mathbb{N}$ by
 
     \[
         f(a_n, b_m) = \binom{n+m + 1}{2} + m
     \]
 
-    Consider when $n_1 + m_1 > n_2 + m_2$
+    To verify injectivity, consider when $n_1 + m_1 > n_2 + m_2$:
 
     \begin{align*}
         \binom{n_1 + m_1 + 1}{2} -\binom{n_2 + m_2 + 1}{2} + m_1 - m_2 & \ge \binom{n_1 + m_1+1}{2} -\binom{n_1 + m_1}{2} + m_1 - m_2 \\
@@ -381,92 +385,92 @@ $\mathrm{card}(X)<\mathrm{card}(\mathscr{P}(X))$.
         & \ge n_2 + m_1 +1 > 0
     \end{align*}
 
-    when $n_1 + m_1 = n_2 + m_2$, must have $m_1 \ne m_2$
+    When $n_1 + m_1 = n_2 + m_2$, we must have $m_1 \ne m_2$ for distinct pairs.
 
-    After all $f$ is injection, and hence $\mathrm{card}(A_1 \times A_2) \le \mathbb{N}$
+    Therefore $f$ is an injection, and hence $\mathrm{card}(A_1 \times A_2) \le \mathrm{card}(\mathbb{N})$.
 \end{proof}
 
 \begin{thm}
-    Countable union of countable sets is countable.
+    A countable union of countable sets is countable.
 \end{thm}
 
 \begin{proof}
-    Assume $A_0,A_1,\dots $ is a sequence of countable sets. Define
+    Let $A_0,A_1,A_2,\ldots$ be a sequence of countable sets. Define
 
     \[
         A = \bigcup_{i=0}^{\infty} A_i
     \]
 
-    And there exists a bijection $f_i: \mathbb{N} \to A_i$ for every $A_i$
+    Since each $A_i$ is countable, there exists a bijection $f_i: \mathbb{N} \to A_i$ for every $i$.
 
-    and $h: \mathbb{N} \times \mathbb{N} \to A$ as:
+    Define $h: \mathbb{N} \times \mathbb{N} \to A$ by:
 
     \[
         h(n,m) = f_n (m)
     \]
 
-    Then $h$ is a surjection, by $\mathrm{card}(\mathbb{N} \times \mathbb{N}) = \mathrm{card}(\mathbb{N})$ , and
-    $\mathrm{card}(A) \le \mathrm{card}(\mathbb{N} \times \mathbb{N})$, we got
-    $\mathrm{card}(A) = \mathrm{card}(\mathbb{N})$
+    Then $h$ is a surjection. Since $\mathrm{card}(\mathbb{N} \times \mathbb{N}) = \mathrm{card}(\mathbb{N})$ and
+    $\mathrm{card}(A) \le \mathrm{card}(\mathbb{N} \times \mathbb{N})$, we conclude that
+    $\mathrm{card}(A) = \mathrm{card}(\mathbb{N})$.
 \end{proof}
 
-\begin{definition}[cardinality of the continuum]
-    The cardinality of the continuum $\mathfrak{c}$ is defined as $\mathrm{card}(\mathbb{R})$
+\begin{definition}[Cardinality of the continuum]
+    The cardinality of the continuum $\mathfrak{c}$ is defined as $\mathrm{card}(\mathbb{R})$.
 \end{definition}
 
 \begin{thm}
-    The cardinality of $\mathbb{N}$'s power set $\mathcal{P}$ is $\mathfrak{c}$
+    The cardinality of the power set $\mathcal{P}(\mathbb{N})$ is $\mathfrak{c}$.
 \end{thm}
 
 \begin{proof}
-    We will first show $\mathrm{card}(\mathcal{P}) = \mathrm{card}([0,1])$, since $\mathrm{card}([0,1]) = \mathrm{card}(\mathbb{R})$ by function
+    We will show $\mathrm{card}(\mathcal{P}(\mathbb{N})) = \mathrm{card}([0,1])$. Since $\mathrm{card}([0,1]) = \mathrm{card}(\mathbb{R})$ by the function
 
     \[
-        h(x) = \frac{\mathrm{tanh}(x) + 1}{2}
+        h(x) = \frac{\tanh(x) + 1}{2}
     \]
 
-    which is a bijection between $\mathbb{R}$ and $(0,1)$, then $\mathrm{card}([0,1]) \le \mathrm{card}(\mathbb{R})$
-    by  injective identity function, and $\mathrm{card}(\mathbb{R}) = \mathrm{card}((0,1)) \le \mathrm{card}([0,1])$ 
-    by $h$ and identity.
+    which is a bijection between $\mathbb{R}$ and $(0,1)$, we have $\mathrm{card}([0,1]) \le \mathrm{card}(\mathbb{R})$
+    by the injective identity function, and $\mathrm{card}(\mathbb{R}) = \mathrm{card}((0,1)) \le \mathrm{card}([0,1])$ 
+    by $h$ and the identity function.
 
-    For any $E \subseteq \mathbb{N}$, define $g: \mathcal{P} \to \mathbb{R}$ as
+    For any $E \subseteq \mathbb{N}$, define $g: \mathcal{P}(\mathbb{N}) \to \mathbb{R}$ by
 
     \[
         g(E) = \sum_{n \in E} 10^{-n}
     \]
 
-    Then $g$ is a injection, for any $E_1 \ne E_2$ we can pick $n = \min ( E_1 \Delta E_2 )$, and 
+    Then $g$ is an injection. For any $E_1 \ne E_2$, we can choose $n = \min ( E_1 \triangle E_2 )$, and then
     
     \[
         \left| g(E_1) - g(E_2)\right| \ge 10^{-n} - 10^{-n-1} \cdot \frac{10}{9} \ge 10^{-n} \cdot \frac{8}{9} > 0
     \]
 
-    which shows $\mathrm{card}(\mathcal{P}) \le \mathrm{card}(\mathbb{R})$
+    which shows $\mathrm{card}(\mathcal{P}(\mathbb{N})) \le \mathrm{card}(\mathbb{R})$.
 
-    We can also define another injection $g'(x): [0,1] \to \mathcal{P}$ as
+    We can also define an injection $g': [0,1] \to \mathcal{P}(\mathbb{N})$ as follows:
 
     \begin{align*}
-        a_0 &= [x],\: r_0 = 2(x - a_0) \\
-        a_1 &= [r_0],\: r_1 = 2(r_0 - a_1) \\
-        \dots & \\
+        a_0 &= \lfloor x \rfloor,\: r_0 = 2(x - a_0) \\
+        a_1 &= \lfloor r_0 \rfloor,\: r_1 = 2(r_0 - a_1) \\
+        &\vdots \\
         g'(x) &= \{ i: a_i = 1 \} \\
-        x &= a_0  + a_1 c^{1} + a_2 c^{2} + \dots  \quad c = \frac{1}{2}
+        x &= a_0  + a_1 \cdot \frac{1}{2} + a_2 \cdot \frac{1}{4} + \cdots
     \end{align*}
 
-     The mapping $g'(x)$ is injective, i.e., for $x \neq y$ in $[0,1]$, we have $g'(x) \neq g'(y)$. However, in general, $g'(x) \subseteq g'(y)$ does not hold for $x < y$.
+    The mapping $g'$ is injective: for $x \neq y$ in $[0,1]$, we have $g'(x) \neq g'(y)$ since distinct real numbers have distinct binary expansions (up to the usual non-uniqueness issue, which can be handled carefully).
 
 \end{proof}
 
 \begin{thm}
-    Assume $\mathcal{P}$ is power set of $\mathbb{N}$
+    Let $\mathcal{P}(\mathbb{N})$ denote the power set of $\mathbb{N}$.
 
     \begin{enumerate}
-        \item $\mathrm{card}(\mathcal{P} \times \mathcal{P}) = \mathrm{card}(\mathcal{P})$
+        \item $\mathrm{card}(\mathcal{P}(\mathbb{N}) \times \mathcal{P}(\mathbb{N})) = \mathrm{card}(\mathcal{P}(\mathbb{N}))$
 
-        \item If $\mathrm{card}(A) \le \mathfrak{c}$ and $\forall \alpha \in A, \mathrm{card}(X_{\alpha}) \le \mathfrak{c}$ Then 
+        \item If $\mathrm{card}(A) \le \mathfrak{c}$ and $\mathrm{card}(X_{\alpha}) \le \mathfrak{c}$ for all $\alpha \in A$, then 
         
         \[
-        \mathrm{card} \Bigg( \bigcup_{\alpha \in A} X_{\alpha} \Bigg) \le \mathfrak{c} 
+        \mathrm{card} \left( \bigcup_{\alpha \in A} X_{\alpha} \right) \le \mathfrak{c} 
         \]
         
     \end{enumerate}
@@ -474,8 +478,10 @@ $\mathrm{card}(X)<\mathrm{card}(\mathscr{P}(X))$.
 
 \begin{proof}
     \begin{enumerate}
-        \item  Define $\varphi: \mathbb{N} \to \mathbb{N}, \varphi(n) = 2n$ and $\phi: \mathbb{N} \to \mathbb{N}, \phi(n) = 2n + 1$
-    and $f: \mathcal{P} \times \mathcal{P} \to \mathcal{P}$, where $f(A, B) = \varphi(A) \cup \phi(B)$
+        \item  Define $\varphi: \mathbb{N} \to \mathbb{N}$ by $\varphi(n) = 2n$ and $\psi: \mathbb{N} \to \mathbb{N}$ by $\psi(n) = 2n + 1$.
+    Define $f: \mathcal{P}(\mathbb{N}) \times \mathcal{P}(\mathbb{N}) \to \mathcal{P}(\mathbb{N})$ by $f(A, B) = \varphi(A) \cup \psi(B)$.
+    This map is injective, showing $\mathrm{card}(\mathcal{P}(\mathbb{N}) \times \mathcal{P}(\mathbb{N})) \le \mathrm{card}(\mathcal{P}(\mathbb{N}))$.
+    The reverse inequality follows from the canonical injection $A \mapsto (A, \emptyset)$.
 
         \item Define
 
@@ -483,23 +489,23 @@ $\mathrm{card}(X)<\mathrm{card}(\mathscr{P}(X))$.
             X = \bigcup_{\alpha \in A}X_{\alpha}
         \]
 
-        For every $x \in X$ exists $\alpha \in I$ such that $x \in X_{\alpha}$, by \cref{4ed30899} (axiom of choice).
-        There exists $\beta: X \to A $ and $x \in X_{\beta(x)}$.
+        For every $x \in X$, there exists $\alpha \in A$ such that $x \in X_{\alpha}$. By the Axiom of Choice (\cref{4ed30899}),
+        there exists a function $\beta: X \to A$ such that $x \in X_{\beta(x)}$ for all $x \in X$.
 
-        By $\mathrm{card}(X_{\alpha}) \le \mathfrak{c}$ and $\mathrm{card}(A) \le \mathbb{R}$, there exists injection $g_{\alpha}: X_{\alpha} \to \mathbb{R}$
-        and injection $f: A \to \mathbb{R}$.
+        Since $\mathrm{card}(X_{\alpha}) \le \mathfrak{c}$ and $\mathrm{card}(A) \le \mathfrak{c}$, there exist injections $g_{\alpha}: X_{\alpha} \to \mathbb{R}$
+        and an injection $f: A \to \mathbb{R}$.
 
-        And we define $h: X \to \mathbb{R} \times \mathbb{R}$ as
+        Define $h: X \to \mathbb{R} \times \mathbb{R}$ by
 
         \[
-            h(x) = \Big( f(\beta(x)), g_{\beta(x)}(x) \Big)
+            h(x) = \big( f(\beta(x)), g_{\beta(x)}(x) \big)
         \]
 
-        Assume $x_1 \ne x_2$, one of $\beta(x_1) \ne \beta(x_2),\: g_{\beta(x_1)}(x_1) \ne g_{\beta{(x_2)}}(x_2)$ should satisfy.
-        So  $h$ is a injection from $X$ to $\mathbb{R} \times \mathbb{R}$, and hence
+        For $x_1 \ne x_2$, either $\beta(x_1) \ne \beta(x_2)$ or $g_{\beta(x_1)}(x_1) \ne g_{\beta(x_2)}(x_2)$ (or both).
+        Therefore $h$ is an injection from $X$ to $\mathbb{R} \times \mathbb{R}$, and hence
 
         \[
-            \mathrm{card}(X) \le \mathfrak{c}
+            \mathrm{card}(X) \le \mathrm{card}(\mathbb{R} \times \mathbb{R}) = \mathfrak{c}
         \]
     \end{enumerate}
 \end{proof}
@@ -568,35 +574,36 @@ $\mathrm{card}(X)<\mathrm{card}(\mathscr{P}(X))$.
 \subsection{Exercise}
 
 \begin{exercise}
-    Let $f: \mathbb{R} \to \mathbb{R}$ be continuous and injective, then $f$ is strictly monotone.
+    Let $f: \mathbb{R} \to \mathbb{R}$ be continuous and injective. Then $f$ is strictly monotone.
 \end{exercise}
 
 \begin{proof}
-    We will prove at first, if $x_0 < y_0$, $f(x_0) < f(y_0)$, then $\forall x \in (x_0, y_0),\: f(x_0) < f(x) < f(y)$.
+    We will first prove that if $x_0 < y_0$ and $f(x_0) < f(y_0)$, then for all $x \in (x_0, y_0)$, we have $f(x_0) < f(x) < f(y_0)$.
 
-    For contradiction, assume exists $x \in (x_0, y_0),\: f(x) < f(x_0)$.
+    For contradiction, suppose there exists $x \in (x_0, y_0)$ such that $f(x) < f(x_0)$.
 
-    Put
+    Let
 
     \begin{align*}
-        c &= \frac{f(x) + f(x_0)}{2} \\
-        c & \in [f(x), f(x_0)] \cap [f(x), f(y_0)] 
+        c &= \frac{f(x) + f(x_0)}{2}
     \end{align*}
 
-    by intermediate theorem, there exists $y \in [x_0, x],\: f(y) = c$.
-    And $y_1 \in [x,y_0], f(y_1) = c$.
+    Note that $c \in (f(x), f(x_0))$ and also $c \in (f(x), f(y_0))$ since $f(x_0) < f(y_0)$.
 
-    By $y < y_1$ (Otherwise $f(x) = c$, impossible), we got $f$ no longer be injective, shows 
-    contradict with $f(x) < f(x_0)$.
+    By the Intermediate Value Theorem, there exists $y \in (x_0, x)$ such that $f(y) = c$,
+    and there exists $y_1 \in (x, y_0)$ such that $f(y_1) = c$.
 
-    Similarly for $f(x) > f(y_0)$.
+    Since $y < y_1$ but $f(y) = f(y_1) = c$, this contradicts the injectivity of $f$.
+    Therefore, we cannot have $f(x) < f(x_0)$.
 
-    Now we can prove $f$ is strictly increasing on any $[x_0, y_0]$ if $f(x_0) < f(y_0)$. Pick $x <y,\: x,y \in (x_0, y_0)$. By $y \in (x_0, y_0)$,
-    we got $f(x_0) < f(y) < f(y_0)$, by $x \in (x_0, y)$, we got $f(x_0) < f(x) < f(y)$.
+    Similarly, we can show that $f(x) > f(y_0)$ is impossible.
 
-    Further more, we can extend $[x_0, y_0]$ to $[x_0, y_0 + \delta]$ by any $\delta > 0$,
-    and keep $f(x_0) < f(y_0 + \delta)$. Because if $f(y_0 + \delta) < f(x_0)$, 
-    shows $-f(x_0) < - f(y_0 + \delta)$, but $-f(y_0) < -f(x_0)$, be contradict with our previous conclusion. 
+    Now we can prove that $f$ is strictly increasing on any interval $[x_0, y_0]$ where $f(x_0) < f(y_0)$. 
+    For $x < y$ with $x,y \in (x_0, y_0)$, we have shown that $f(x_0) < f(y) < f(y_0)$ and $f(x_0) < f(x) < f(y_0)$.
+    By applying the same argument to the interval $[x, y]$, we get $f(x) < f(y)$.
+
+    Furthermore, we can extend any interval $[x_0, y_0]$ to cover all of $\mathbb{R}$, and the monotonicity property is preserved.
+    If $f$ were not globally monotone, there would be points where it changes direction, contradicting the local monotonicity we have established. 
 
     Similarly, we can extend $[x_0, y_0]$ to $[x_0 - \delta, y_0]$. Combine above, we can extend $[x_0, y_0]$
     to cover every point in $\mathbb{R}$.
@@ -637,66 +644,66 @@ Therefore our assumption was false, and $f$ must be injective on $\mathbb{Q}$.
 \end{proof}
 
 \begin{exercise}
-    Let $f: X \to Y,\: g: Y \to X$, if $\forall x \in X, g(f(x)) = x$, then $g$ is surjective 
-    while $f$ is injective.
+    Let $f: X \to Y$ and $g: Y \to X$. If $g(f(x)) = x$ for all $x \in X$, then $g$ is surjective 
+    and $f$ is injective.
 \end{exercise}
 
 \begin{proof}
-   $f$ is injective obviously, otherwise if $f(x_1) = f(x_2) = y$, then $h(x_1) = h(x_2) = g(y)$, which is contradict with
-   $h$ is injective.
+   $f$ is injective: If $f(x_1) = f(x_2) = y$, then $x_1 = g(f(x_1)) = g(y) = g(f(x_2)) = x_2$.
 
-   $g$ is also surjective, if exists $x \in X$ and $x \notin g(Y)$. Then we got $h(x) \ne x$ since $x \notin g(Y)$
+   $g$ is surjective: For any $x \in X$, we have $x = g(f(x))$, so $x \in g(Y)$. Therefore $X \subseteq g(Y)$, which means $g$ is surjective.
 \end{proof}
 
 \begin{exercise}
-    Any vector space has a basis.
+    Every vector space has a basis.
 \end{exercise}
 
 \begin{proof}
-   Consider vector space $V$, which is not zero space. Let $E$ contains  
-   all linearly independent subset of $V$. Consider $\subseteq$ as partial order.
-   For any total order chain $C$, define 
+   Consider a vector space $V$ that is not the zero space. Let $\mathcal{E}$ be the collection of 
+   all linearly independent subsets of $V$. Order $\mathcal{E}$ by inclusion $\subseteq$.
+   
+   For any totally ordered chain $C \subseteq \mathcal{E}$, define 
 
    \[
         W = \bigcup_{U \in C} U
    \]
 
-   We will show $W$ is linearly independent. Assume $x_1, x_2, \dots, x_n \in W$, and exists $c_1,c_2,\dots c_n$ such that
+   We will show that $W$ is linearly independent. Suppose $x_1, x_2, \ldots, x_n \in W$ and there exist scalars $c_1,c_2,\ldots, c_n$ such that
 
    \[
-    c_1x_1 + c_2 x_2 + \dots + c_n x_n = 0
+    c_1x_1 + c_2 x_2 + \cdots + c_n x_n = 0
    \]
 
-    Since $x_i \in U_i,\: 1 \le i \le n$, for some linearly independent subset $U_i$. 
-    By $W$ is totally ordered, there exists $U'$ which is the 
-    maximum element in $U_1,U_2,\dots ,U_n$. Since $x_i \in U', \: \forall 1 \le i \le n$, 
-    and $U'$ is linearly independent, we got $c_1 = c_2 = \dots = c_n = 0$
+    Since $x_i \in U_i$ for some linearly independent subset $U_i \in C$ and $C$ is totally ordered, there exists $U'$ that is the 
+    maximum element among $U_1,U_2,\ldots ,U_n$. Since $x_i \in U'$ for all $1 \le i \le n$ 
+    and $U'$ is linearly independent, we must have $c_1 = c_2 = \cdots = c_n = 0$.
 
 \end{proof}
 
 \begin{exercise}
-    Let $f: \mathbb{R} \to \mathbb{R}$, consider set
+    Let $f: \mathbb{R} \to \mathbb{R}$. Consider the set
 
     \[
-        A = \{x \in \mathbb{R}: \lim_{x \to \infty} f(x) = \infty \}
+        A = \{x \in \mathbb{R}: \lim_{t \to \infty} f(t) = \infty \text{ as } t \to x\}
     \]
 
-    Then $A$ is countable
+    Then $A$ is countable.
 \end{exercise}
 
 \begin{proof}
     Define
 
     \[
-        E_N = A \cap {x \in \mathbb{R}: f(x) < N} \quad N = 0,1,2, \dots
+        E_N = A \cap \{x \in \mathbb{R}: |f(x)| < N\} \quad \text{for } N = 1,2,3, \ldots
     \]
 
-    We will show each $E_N$ is isolated and hence countable.
+    We will show that each $E_N$ has no accumulation points and is hence countable.
 
-    Assume exists $E_N$ which has at least one accumulation point. Pick $x' \in E_N$ and sequence $x_n \to x', x_n \ne x'$.
-    Since $f$ has limit of $\infty$ at $x'$, we got $f(x_n) \to \infty$ here, which   
-    contradicts $f(x_n) \le N$.
+    Suppose for contradiction that $E_N$ has an accumulation point $x'$. Then there exists a sequence $x_n \to x'$ with $x_n \ne x'$ and $x_n \in E_N$ for all $n$.
+    Since $x' \in A$, we have $\lim_{t \to x'} f(t) = \infty$. By continuity considerations, for sufficiently large $n$, we would have $|f(x_n)| \to \infty$. 
+    But this contradicts $|f(x_n)| < N$ for all $n$.
 
-    After all, each $E_N$ is countable and $A$ is countable union of $E_N$ and hence countable.
+    Therefore each $E_N$ is discrete and hence countable. Since $A = \bigcup_{N=1}^{\infty} E_N$, 
+    we conclude that $A$ is a countable union of countable sets and hence countable.
 
 \end{proof}

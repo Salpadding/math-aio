@@ -550,7 +550,18 @@ $\mathrm{card}(X)<\mathrm{card}(\mathscr{P}(X))$.
         J &= \bigcup_{x \in A} I_x \\
     \end{align*}
 
-    If $J \ne X$, let $b = \min X \setminus J$, $B = \{ x \in X: b \le x \}$. We will prove $X \setminus J = B$.
+    If $J \ne X$, let $b = \min X \setminus J$, $I_b = \{ y \in X:  y <  b\}$. 
+    By definition of $b$, we got $X \setminus J \subseteq \{ y \in X: y \ge b\}$
+    and hence $I_b \subseteq J$
+
+
+        \begin{align*}
+            J \setminus I_b &= \bigcup_{x \in A} I_x \cap \{ y \in X: y \ge b\} \\
+            &= \bigcup_{x \in A} \{y \in X: b \le y < x\}
+        \end{align*}
+
+    If exists $y \in J \setminus I_b$, there exists $x \in A$ and $b \le y < x$, which shows $b \in I_x$, which 
+    contradicts $b \notin J$, so $J \setminus I_b = \emptyset$.
 
 \end{proof}
 
@@ -660,5 +671,32 @@ Therefore our assumption was false, and $f$ must be injective on $\mathbb{Q}$.
     By $W$ is totally ordered, there exists $U'$ which is the 
     maximum element in $U_1,U_2,\dots ,U_n$. Since $x_i \in U', \: \forall 1 \le i \le n$, 
     and $U'$ is linearly independent, we got $c_1 = c_2 = \dots = c_n = 0$
+
+\end{proof}
+
+\begin{exercise}
+    Let $f: \mathbb{R} \to \mathbb{R}$, consider set
+
+    \[
+        A = \{x \in \mathbb{R}: \lim_{x \to \infty} f(x) = \infty \}
+    \]
+
+    Then $A$ is countable
+\end{exercise}
+
+\begin{proof}
+    Define
+
+    \[
+        E_N = A \cap {x \in \mathbb{R}: f(x) < N} \quad N = 0,1,2, \dots
+    \]
+
+    We will show each $E_N$ is isolated and hence countable.
+
+    Assume exists $E_N$ which has at least one accumulation point. Pick $x' \in E_N$ and sequence $x_n \to x', x_n \ne x'$.
+    Since $f$ has limit of $\infty$ at $x'$, we got $f(x_n) \to \infty$ here, which   
+    contradicts $f(x_n) \le N$.
+
+    After all, each $E_N$ is countable and $A$ is countable union of $E_N$ and hence countable.
 
 \end{proof}

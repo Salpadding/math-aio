@@ -1,0 +1,59 @@
+\section{Topology On Real}
+
+\subsection{Topology on Real Line}
+
+\begin{thm}
+    Any open set under $\mathbb{R}$ is countable union
+    of disjoint open intervals
+\end{thm}
+
+\begin{proof}
+    If $U$ is open, for each $x \in U$ consider the collection $\mathcal{J}_x$ of all open
+intervals $I$ such that $x \in I \subseteq U$. It is easy to check that the union of any family
+of open intervals containing a point in common is again an open interval, and hence
+
+\[
+    J_x = \bigcup_{I \in \mathcal{J}_x} I
+\]
+
+is an open interval; it is the largest element of $\mathcal{J}_x$. If $x, y \in U$ then
+either $J_x = J_y$ or $J_x \cap J_y = \varnothing$, for otherwise $J_x \cup J_y$ 
+would be a larger open interval
+than $J_x$. Thus if $\mathfrak{J} = \{ J_x : x \in U \}$, the (distinct) members of $\mathfrak{J}$ are disjoint,
+and 
+
+\[
+J = \bigcup_{J \in \mathfrak{J}} J
+\]
+For each $J \in \mathfrak{J}$, pick a rational number $f(J) \in J$. The map
+$f : \mathfrak{J} \to \mathbb{R}$ thus defined is injective,  therefore $\mathfrak{J}$ is
+countable.
+\end{proof}
+
+\begin{thm}
+    Open sets in $\mathbb{R}^n$ is countable union of open balls.
+\end{thm}
+
+\begin{proof}
+   Let $V \subseteq \mathbb{R}^n$ be an open sets. For any $x \in V$, there should exists $B(x, r_x) \subseteq V$. 
+   Since $\mathbb{Q}$ is dense in $\mathbb{R}$, there should exists a rational point $q_x = (q_1,q_2,\dots,q_n) \in B(x, r_x/4)$.
+   Put $r_{q(x)}$ be a rational in $(r_x /4 ,r_x/2)$, then $x \in B(q_x, r_{q(x)}) \subseteq B(x, r_x)$
+
+   Thus we got:
+
+   \[
+    V = \bigcup_{x \in V} B(q_x ,r_{q(x)})
+   \]
+
+   The set
+
+   \[
+    \mathcal{I} = \{ B(q_x, r_{q(x)}): x \in V\}
+   \]
+
+   is countable, because we can made a injection from $h: \mathcal{I} \to \mathbb{Q} \times \mathbb{Q}$, which is 
+
+   \[
+    h\Big(B(q_x, r_{q(x)})\Big) = (q_x, r_{q(x)})
+   \]
+\end{proof}

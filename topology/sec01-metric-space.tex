@@ -160,6 +160,11 @@
     many properties of closure follow directly from the corresponding properties of the interior.
 \end{definition}
 
+\begin{definition}[Boundary]
+    The boundary of set $E$ is defined as $\overline{E} \setminus \mathrm{int}(E)$,
+    often denoted as $\partial E$. 
+\end{definition}
+
 \begin{thm}
     For any $A\subseteq X$, the closure $\overline{A}$ satisfies:
     \begin{enumerate}
@@ -330,7 +335,7 @@
     \]
 \end{proof}
 
-\begin{thm}
+\begin{thm}\label{4ebc8233}
     In a first countable space $X$, a point $p$ is a limit point of $E\subset X$ iff 
     there exists a sequence $\{ x_n \}$ with $x_n\in E\setminus\{p\}$ and $x_n\to p$. Moreover, if $X$ is $T_1$, the sequence can be chosen with pairwise distinct terms. In particular, in a $T_1$ space one may remove finitely many points from $E$ without affecting whether $p$ is a limit point.
 \end{thm}
@@ -362,67 +367,29 @@
     \end{enumerate}
 \end{proof}
 
-\subsection{Compact Set}
 
 \begin{thm}
-      If $E \subseteq \mathbb{R}^n$ is bounded and closed, then $E$ is compact.
+    If $X$ is first countable and T1 space, then for any set $E_1, E_2$ under $X$, $\big( E_1 \cup E_2 \big)' =  E_1' \cup E_2'$
 \end{thm}
 
+
 \begin{proof}
-Let $\{V_\alpha\}_{\alpha \in I}$ be an open cover of $E$. Define, for each $x \in E$,
+    Pick $x' \in \big( E_1 \cup E_2 \big)'$, by \cref{4ebc8233}, there exists distinct $x_n \in E_1 \cup E_2$
+    and $x_n \to x'$.
 
-\[
-  r(x) := \sup\{\, r > 0 : \exists\, \alpha \in I \text{ with } B(x,r) \subseteq V_\alpha \,\}.
-\]
+    Consider set
 
+    \begin{align*}
+        W_1 &= \{ n \in \mathbb{N}: x_n \in E_1 \} \\
+        W_2 &= \{ n \in \mathbb{N}: x_n \in E_2 \} \\
+    \end{align*}
 
-We first show that $r$ is lower semicontinuous. Fix $a \in \mathbb{R}$. 
-If $r(x) > a$,
-then by definition there exist $\alpha$ and $r>a$ with $B(x,r) \subseteq V_\alpha$.
-Let $\varepsilon = (r-a)/4 > 0$. For any $p \in B(x,\varepsilon)$ we have
-$B(p,r-\varepsilon) \subseteq B(x,r) \subseteq V_\alpha$; since $r-\varepsilon > a+\varepsilon$,
-it follows that $r(p) > a$. Hence the set $\{x \in E : r(x) > a\}$ is open, i.e. $r$ is
-lower semicontinuous. In particular, for any sequence $x_n \to x$ in $E$,
-
-\[
-  \varliminf_{n \to \infty} r(x_n) \ge r(x).
-\]
-
-Set $r_0 := \inf\{ r(x) : x \in E \}$.
-
-\textbf{Claim 1}: $r_0 > 0$. Suppose to the contrary that $r_0 = 0$. Then there exists a
-sequence $x_n \in E$ with $r(x_n) \to 0$. Since $E$ is bounded, by \cref{metric-space-bolzano-weierstrass}
-there is a subsequence $y_n = x_{f(n)}$ converging to some $y \in \mathbb{R}^n$; because
-$E$ is closed, $y \in E$. As $\{V_\alpha\}$ covers $E$ and $y \in E$, there exists some
-$\alpha_0$ with $y \in V_{\alpha_0}$; since $V_{\alpha_0}$ is open, there exists
-$\delta>0$ with $B(y,\delta) \subseteq V_{\alpha_0}$. Hence $r(y) \ge \delta > 0$.
-But lower semicontinuity gives
-$
-  \liminf_{n \to \infty} r(y_n) \ge r(y) > 0,
-$
-contradicting $r(y_n)=r(x_{f(n)}) \to 0$. Thus $r_0>0$.
-
-\textbf{Claim 2}: $\{V_\alpha\}$ has a finite subcover. Choose any $x_0 \in E$.
-By definition of $r_0$ and the cover, there exists $\alpha_0$ with
-$B(x_0,r_0) \subseteq V_{\alpha_0}$. If $E \subseteq V_{\alpha_0}$, we are done.
-Otherwise pick $x_1 \in E \setminus V_{\alpha_0}$; then there exists $\alpha_1$
-with $B(x_1,r_0) \subseteq V_{\alpha_1}$. Note that $B(x_0,r_0)$ and $B(x_1,r_0)$
-are disjoint, since otherwise $x_1 \in B(x_0,r_0) \subseteq V_{\alpha_0}$.
-
-Proceed inductively: having chosen pairwise disjoint balls $B(x_k,r_0) \subseteq V_{\alpha_k}$
-for $k=0,\dots,m-1$ whose corresponding $V_{\alpha_k}$ do not yet cover $E$, pick
-$x_m \in E \setminus \bigcup_{k=0}^{m-1} V_{\alpha_k}$ and then choose $\alpha_m$
-with $B(x_m,r_0) \subseteq V_{\alpha_m}$. Again, $B(x_m,r_0)$ is disjoint from the
-previous balls, so the centers satisfy $|x_i - x_j| \ge r_0$ for $i \ne j$.
-
-If this process never stops, we produce infinitely many pairwise disjoint balls of
-radius $r_0/2$ inside a fixed bounded set containing $E$. This is impossible in
-$\mathbb{R}^n$ (e.g., by a simple volume-packing bound). Therefore the process must
-terminate after finitely many steps, yielding a finite subcover of $E$.
-
-Since every open cover of $E$ admits a finite subcover, $E$ is compact.
+    At least one of $W_1$ or $W_2$ is infinite, and hence $x_n$ has a subsequence
+    in $E_1$ or $E_2$
+    converges to $x'$, which indicates $x' \in E_1' \cup E_2'$
 \end{proof}
 
+\subsection{Compact Set}
 \begin{thm}
     In Hausdorff space, compact set is closed.
 \end{thm}
@@ -504,6 +471,72 @@ Since every open cover of $E$ admits a finite subcover, $E$ is compact.
     which is contradict with $E$ is infinite.
 \end{proof}
 
+\begin{definition}[Sequentially Compact]
+    A topological space is sequentially compact if every sequence has a convergent subsequence.
+\end{definition}
+
+\begin{thm}
+    For a metric space $(X,d)$, it is compact iff it is sequentially compact.
+\end{thm}
+
+\begin{proof}
+    \begin{enumerate}
+        \item[($\Rightarrow$)]
+        If $X$ is compact, consider $x_n$ be any sequence, if set $\{ x_n \}$ is finite, at least 
+    one of $\{ x_n \}$ occurs infinitely many times, and hence a convergent subsequence. 
+    If $\{ x_n \}$ is infinite, it must have a limit point in $X$, assume $x_0$ is a limit point of $\{ x_n \}$.
+
+    Now we can pick $x_{n_1}$ such that $d(x_{n_1}, x_0) < \frac{1}{2}$, and $n_2 > n_1$ such that 
+    $d(x_{n_2}, x_0) < \frac{1}{2^2}$, by \cref{2dc4936a} and thus construct a subsequence converges to $x_0$
+
+        \item[($\Leftarrow$)]
+Let $\{V_\alpha\}_{\alpha \in I}$ be an open cover of $X$. Define, for each $x \in X$,
+
+\[
+  r(x) := \sup\{\, r > 0 : \exists\, \alpha \in I \text{ with } B(x,r) \subseteq V_\alpha \,\}.
+\]
+
+
+We first show that $r$ is lower semicontinuous. Fix $a \in \mathbb{R}$. 
+If $r(x) > a$,
+then by definition there exist $\alpha$ and $r>a$ with $B(x,r) \subseteq V_\alpha$.
+Let $\varepsilon = (r-a)/4 > 0$. For any $p \in B(x,\varepsilon)$ we have
+$B(p,r-\varepsilon) \subseteq B(x,r) \subseteq V_\alpha$; since $r-\varepsilon > a+\varepsilon$,
+it follows that $r(p) > a$. Hence the set $\{x \in E : r(x) > a\}$ is open, i.e. $r$ is
+lower semicontinuous. In particular, for any sequence $x_n \to x$ in $E$,
+
+\[
+  \varliminf_{n \to \infty} r(x_n) \ge r(x).
+\]
+
+Set $r_0 := \inf\{ r(x) : x \in E \}$.
+
+\textbf{Claim 1}: $r_0 > 0$. Suppose to the contrary that $r_0 = 0$. Then there exists a
+sequence $x_n \in E$ with $r(x_n) \to 0$. Since $E$ is bounded, by \cref{metric-space-bolzano-weierstrass}
+there is a subsequence $y_n = x_{f(n)}$ converging to some $y \in \mathbb{R}^n$; because
+$E$ is closed, $y \in E$. As $\{V_\alpha\}$ covers $X$ and $y \in X$, there exists some
+$\alpha_0$ with $y \in V_{\alpha_0}$; since $V_{\alpha_0}$ is open, there exists
+$\delta>0$ with $B(y,\delta) \subseteq V_{\alpha_0}$. Hence $r(y) \ge \delta > 0$.
+But lower semicontinuity gives
+$
+  \liminf_{n \to \infty} r(y_n) \ge r(y) > 0,
+$
+contradicting $r(y_n)=r(x_{f(n)}) \to 0$. Thus $r_0>0$.
+
+\textbf{Claim 2}: $\{V_\alpha\}$ has a finite sub cover. For sake of contradiction, choose any $x_0 \in X$.
+By definition of $r_0$ and the cover, there exists $\alpha_0$ with
+$B(x_0,r_0) \subseteq V_{\alpha_0}$. Since $X$ not covered by $V_{\alpha_0}$,
+we can pick $x_1 \in X \setminus V_{\alpha_0}$; then there exists $\alpha_1$
+with $B(x_1,r_0) \subseteq V_{\alpha_1}$. We can continue to pick $x_2,x_3,\dots$ infinitely.
+
+The $x_n$ here cannot contains any convergent subsequence, pick any $x_i, x_j$ in $\{ x_n \}$,
+assume $i < j$, by $x_j \subseteq X \setminus B(x_i, r_0)$, we got $d(x_i, x_j) \ge r_0$.
+This is contradict with $X$ is sequentially compact, thus $\{V_\alpha\}$ has a finite sub cover.
+
+    \end{enumerate}
+
+\end{proof}
+
 
 \begin{thm}\label{e0cea514}
     Suppose $I_k = [a_k, b_k]$ where $a_k \le b_k$, and $I_{k+1} \subseteq I_k$, then
@@ -558,7 +591,7 @@ Since every open cover of $E$ admits a finite subcover, $E$ is compact.
     And $I_0$ has an open cover.
 
     Then we divide $I_0$ into $2^n$ pieces, if $I_0$ is not compact, 
-    there exists $I_1 \subseteq I_1$ which is one of piece of $I_0$, and 
+    there exists $I_1 \subseteq I_0$ which is one of piece of $I_0$, and 
     $I_1$ has no finite sub cover. And we can construct $I_1,I_2,I_3,\dots$ 
     inductively, where $I_k$ has no finite sub cover.
 
@@ -589,21 +622,26 @@ Since every open cover of $E$ admits a finite subcover, $E$ is compact.
 \end{thm}
 
 \begin{proof}
-    Assume $a_n$ is bounded sequence in $\mathbb{R}^n$, thus we can put set $\{ a_n \}$
-    inside a compact box $K$. If set $ \{ a_n \} $ is finite, at least one of $\{ a_n \}$
-    occurs infinitely, otherwise by \cref{e603cd67} set $\{ a_n \}$ has a limit point in $K$.
-
-    Consider this limit point as $p$, we can select $a_{n_1}$ such that $d(a_{n_1}, p) \le 1$,
-    consider set $\{ a_n \}_{n > n_1}$, $p$ is also limit point of $\{ a_n \}_{n > n_1}$, because 
-    we only exclude finite points from $\{ a_n \}$, after all, we construct a convergent subsequence.
+    A bounded and closed set is a compact metric space, and hence sequentially compact.
 \end{proof}
 
-\section{Exercise}
+\begin{remark}
+    The following three proposition is identical in $\mathbb{R}^n$, assume $K \subseteq \mathbb{R}^n$
+
+    \begin{enumerate}
+        \item $K$ is compact.
+        \item $K$ is closed and bounded.
+        \item $K$ is sequentially compact.
+    \end{enumerate}
+\end{remark}
+
+\subsection{Exercise}
 
 \begin{exercise}
     Let $X \ne \emptyset, f: \mathscr{P}(X) \to \mathscr{P}(X)$. If $\forall A \subseteq B, f(A) \subseteq f(B)$. Then
     exists $T \subseteq X$ and $f(T) = T$
 \end{exercise}
+
 
 \begin{proof}
    Define 

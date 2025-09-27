@@ -1,0 +1,55 @@
+\section{Continuity}
+
+\subsection{Continuous}
+
+\begin{definition}[Distance]
+   In a metric space, the distance between a point $x$ and a set $E$ is defined as:
+   
+   \[
+    d(x, E) = \inf {d(x,y): y \in E}
+   \]
+
+   The distance between two sets $E_1, E_2$ is defined as
+
+   \[
+    d(E_1, E_2) = \inf { d(x,y): x \in E_1, y \in E_2}
+   \]
+\end{definition}
+
+\begin{corollary}
+    If $d(x, E) = 0$ and $x \notin E$, then $x \in E'$.
+\end{corollary}
+
+
+\begin{definition}[Oscillation]
+    Let $f: E \to \mathbb{R}$, the oscillation function $\omega_f$ is defined as
+
+    \[
+        \omega_f(x) = \inf \mathrm{diam}(f(V_x)) \quad V_x \text{ is any neighborhood of } x
+    \]
+\end{definition}
+
+\begin{corollary}
+    Let $f: X \to \mathbb{R}$, where $E$ is a metric space, then
+
+
+    \[
+        \omega_f(x) = \lim_{\delta \to 0} \sup \{ \left| f(s) - f(t) \right|: s,t \in B(x, \delta) \}
+    \]
+\end{corollary}
+
+\begin{thm}
+    Oscillation is upper semi continuous. That is
+
+    \[
+        \forall x \in X,\: \{x: \omega_f (x) < t \} \mathrm{\ is\ open}
+    \]
+\end{thm}
+
+\begin{proof}
+    Assume $\omega_f(x) = a < t$, pick any $c$ such that $a < c < t$, by definition of $\inf$, 
+    there exists neighborhood $V_0$ such that $\mathrm{diam}(f(V_0)) \le c$.
+
+    Now consider any $x' \in V_0$, since $V_0$ contains $x'$, and $\mathrm{diam}(f(V_0)) \le c$,
+    we got $\omega_f(x') \le c < t$, which shows $\omega_f$ is upper semi continuous
+\end{proof}
